@@ -1,0 +1,1 @@
+web: gunicorn fire_syndicate.wsgi --log-file -
