@@ -1,0 +1,8 @@
+{%extends 'layout.html'%}
+{%block content%}
+<form method="POST">{%csrf_token%}
+	<h1> You sure buddy? You wanna delete {{object.title}}</h1>
+	<input type="submit" name="Yes" value="Yes"/> <a href = '../'>cancel</a>
+	
+</form>
+{%endblock%}

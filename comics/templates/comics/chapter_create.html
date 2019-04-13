@@ -1,0 +1,11 @@
+{%extends 'layout.html' %}
+{%block content%}
+<form method="POST" enctype= "multipart/form-data"> {% csrf_token %}
+	{{ form.as_p }}
+	{{file_form.as_p}}
+
+	<input type="submit" name="Create Article">
+
+</form>
+{%endblock%}
+	<input type="file" name="Upload zip" multiple>}

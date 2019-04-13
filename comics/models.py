@@ -1,0 +1,54 @@
+from django.db import models
+from django.urls import reverse
+    
+import os, random
+
+# Create your models here.
+
+class Comic(models.Model):
+	title 			= models.CharField(max_length = 120)
+	description		= models.TextField()
+	cover 			= models.ImageField(blank = True, default = 'no-image.png')
+	status			= models.PositiveSmallIntegerField(default = True)				 # 1 = Working,		2 = on Hold,	0 = Dropped , hidden = 4
+	views_cnt		= models.PositiveIntegerField(default = 0)
+
+	def __str__(self):
+		return "{title}".format(title = self.title)
+
+	def get_absolute_url(self):
+		return reverse("comic-detail", kwargs = {'pk' : self.pk}) 
+
+	ordering	=	["title"]
+
+
+class Chapter(models.Model):
+	number 			= models.DecimalField(max_digits = 10,  decimal_places = 2)
+	name			= models.CharField(max_length = 120, blank = True, null = True)
+	views_cnt		= models.PositiveIntegerField(default = 0, null = False)
+	updated_at 		= models.DateTimeField(auto_now_add=True)
+	created_at 		= models.DateTimeField(auto_now=True)
+	comic 			= models.ForeignKey(Comic,on_delete=models.CASCADE)
+	image 			= models.ImageField(upload_to ="", null = True, blank = True)
+
+
+	def __str__(self):
+		return "Chapter {num} | {comic}".format(num= self.number, comic = self.comic)
+
+	def get_absolute_url(self):
+		return reverse("chapter-view", kwargs = {'pk' : self.pk}) 
+
+	ordering = ['-number']
+
+
+
+class Page(models.Model):
+
+ 	chapter			= models.ForeignKey(Chapter, on_delete= models.CASCADE)
+ 	image 			= models.ImageField(upload_to ="" )
+ 	page_number		= models.PositiveIntegerField()
+ 	updated_at		= models.DateTimeField(auto_now_add=True)
+
+
+ 	def __str__(self):
+ 		return '{id}'.format(id =self.id)
+

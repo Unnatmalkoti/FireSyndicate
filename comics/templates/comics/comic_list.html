@@ -1,0 +1,9 @@
+{%extends 'layout.html'%}
+{% block content %}
+<h1>All Comics</h1>
+{% for comic in object_list %}
+
+<li><a href="{{comic.get_absolute_url}}">{{forloop.counter}}- <STRONG>{{comic.title}}</STRONG></a></li>
+{%endfor%}
+
+{% endblock content %}

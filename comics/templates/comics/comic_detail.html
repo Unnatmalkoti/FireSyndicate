@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>{{object_data.title}}</h1>
+<h3>{{object_data.description}}</h3>
+{%if object_data.cover%}
+<img src= "{{object_data.cover.url}}"/>
+{%endif%}
+<a href="{% url "chapter-create" object_data.pk%}">create a new chapter</a>
+<ul>
+{% for chapter in queryset %}
+   <a href="{{chapter.get_absolute_url}}"> <li>{{chapter.name}}  {{chapter.number}}</li></a> <p>Views = {{chapter.views_cnt}}</p>  
+   <a href="{% url "chapter-delete" chapter.pk %}">delete</a>
+{% endfor %}
+</ul>
+
+
+
+{% endblock content %}
