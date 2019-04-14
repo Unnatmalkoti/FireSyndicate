@@ -11,7 +11,7 @@
 	<div class ="section-heading">Lastest </div>
 		<div class ="tile-wrapper">
 			{% for chapter in LatestChapters %}
-
+		<a href="{% url "chapter-view" chapter.pk%}">
 			<div class="tile"> 
 		
 				{%if chapter.comic.cover%}
@@ -26,21 +26,24 @@
 			{% endfor %}
 			
 		</div>
+	</a>
 
 </div>
 
 <div class="section">
 		<div class ="section-heading">Popular</div>
 			{% for comic in PopularComics %}
+			<a href="{% url "comic-detail" comic.pk%}">
 				<div class="tile"> 
 					{%if comic.cover%}
 
 					<img src="{{comic.cover.url}}" class="comic-cover" height='300'>
 					{%endif%}
-
-					<a href="{% url "comic-detail" comic.pk%}"><h3>{{comic.title}}</h3></a>
-					<p>Views : {{comic.views_cnt}}</p>
+					<div id="tile-title">
+					<a  href="{% url "comic-detail" comic.pk%}">{{comic.title}}</a>
 				</div>
+				</div>
+			</a>
 			{% endfor %}
 </div>
 

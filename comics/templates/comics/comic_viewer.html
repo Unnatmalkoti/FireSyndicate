@@ -1,13 +1,21 @@
 {% extends "layout.html" %}
 
+{%load static%}
+
+{%block css%}
+<link rel="stylesheet" href="{% static "css/comic-viewer.css"%}">
+{%endblock css%}
+
 {% block content %}
-<h1>{{object_data.name}} - {{object_data.number}}</h1>
 
+<a href="{%url "comic-detail" object_data.comic.pk%}"><span class="comic-title"><strong>{{object_data.comic.title }}</strong></span></a>
+<span class="chapter-title">Chapter {{object_data.number |floatformat}} - {{object_data.name}}</span>
 
+<div class="image-wrapper">
 {% for page in queryset %}
-	<img src='{{ page.image.url}}'/>
+	<img src='{{ page.image.url}}' class ="content-image"/>
 {% endfor %}
-
+</div>
 
 
 

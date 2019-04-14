@@ -1,18 +1,60 @@
 {% extends "layout.html" %}
+
+{%load static%}
+
+{%block css%}
+<link rel="stylesheet" href="{% static "css/comic-detail.css"%}">
+{%endblock css%}
+
 {% block content %}
-<h1>{{object_data.title}}</h1>
-<h3>{{object_data.description}}</h3>
-{%if object_data.cover%}
-<img src= "{{object_data.cover.url}}"/>
-{%endif%}
-<a href="{% url "chapter-create" object_data.pk%}">create a new chapter</a>
-<ul>
+
+<h2>{{object_data.title}}</h2>
+
+<div>
+	<div class="comic-cover">
+	{%if object_data.cover%}
+	<img src= "{{object_data.cover.url}}" height="400" />
+	{%endif%}
+	</div>
+	<div class="comic-desc">
+		<p><strong>Author : </strong></p>
+		<p><strong>Artist : </strong></p>
+		<p><strong>Description : </strong>{{object_data.description}}</p>
+		<p><strong>Views : </strong>{{object_data.views_cnt}}</p><br>
+		{%if user.is_authenticated%}
+		<p><strong><a href="{% url "chapter-create" object_data.pk%}">Upload a Chapter</a></strong></p>
+		{%endif%}
+
+	</div>
+</div>
+<br>
+
+<div id="chapter-container">
+	<h2>Chapters</h2>
+
+<table class="chapter">
+<thead>
+	<td>Chapters</td>
+	<td>Views</td>
+	<td>Action</td>
+</thead>
 {% for chapter in queryset %}
-   <a href="{{chapter.get_absolute_url}}"> <li>{{chapter.name}}  {{chapter.number}}</li></a> <p>Views = {{chapter.views_cnt}}</p>  
-   <a href="{% url "chapter-delete" chapter.pk %}">delete</a>
+
+	<tr class="content"><div>
+    <td class="chapter-title"><a href="{{chapter.get_absolute_url}}">{{chapter.name}} {{chapter.number}}</a></td>
+	<td class="chapter-view">{{chapter.views_cnt}}</td>
+	<td class="delete">
+	{%if user.is_authenticated%}
+   	<a href="{% url "chapter-delete" chapter.pk %}">delete</a>
+   	{%endif%}
+   	</td>
+   	</div>
+    </tr>
 {% endfor %}
-</ul>
+</table>
+</div>
 
 
 
 {% endblock content %}
+

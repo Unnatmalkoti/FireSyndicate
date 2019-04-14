@@ -15,7 +15,7 @@ class ChapterImagesForm(forms.Form):
 class ComicCreateForm(forms.ModelForm):
 	class Meta():
 		model = Comic
-		fields= ["title", "description", "cover", "status"]
+		fields= ["title","author","artist", "description", "cover", "status"]
 
 class LoginForm(forms.Form):
 	user_name   = forms.CharField(max_length= 20)

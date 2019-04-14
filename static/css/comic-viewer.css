@@ -1,0 +1,25 @@
+.content-image{
+		width :100%;
+	max-width: 900px;
+	min-width: 400px;
+
+
+}
+
+.image-wrapper
+{
+	text-align: center;
+}
+
+.comic-title
+{
+	font-size: 23px;
+	margin :10px;
+	display: inline-block;
+}
+.chapter-title
+{
+	font-size: 18px;
+	margin :10px
+	display: inline-block;
+}

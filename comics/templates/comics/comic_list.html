@@ -1,9 +1,35 @@
 {%extends 'layout.html'%}
 {% block content %}
-<h1>All Comics</h1>
-{% for comic in object_list %}
+{%load static%}
 
-<li><a href="{{comic.get_absolute_url}}">{{forloop.counter}}- <STRONG>{{comic.title}}</STRONG></a></li>
+{%block css%}
+<link rel="stylesheet" href="{% static "css/comic-list.css"%}">
+{%endblock css%}
+
+<h1>All Comics</h1>
+<div clss="tile-wrapper">
+{% for comic in object_list %}
+			<a href="{% url "comic-detail" comic.pk%}">
+				<div class="tile">
+					{%if comic.cover%}
+
+					<img src="{{comic.cover.url}}" class="comic-cover" height='200'>
+					{%endif%}
+
+					<div class="comic-data">
+					<a href="{% url "comic-detail" comic.pk%}"><h3>{{comic.title}}</h3></a>
+
+					<div class="comic-detail">
+					<p>Author : </p>
+					<p>Artist : </p>
+					<p>Views : {{comic.views_cnt}}</p>
+					<a id="seemore" href="{% url "comic-detail" comic.pk%}"><h4>See more</h4></a>
+					</div>
+					</div>
+				</div>	
+			</a>
+
 {%endfor%}
+</div>
 
 {% endblock content %}

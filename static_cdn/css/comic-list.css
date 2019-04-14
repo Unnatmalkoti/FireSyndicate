@@ -1,0 +1,40 @@
+div .tile-wrapper
+{
+	display: inline-block;
+}
+div .tile
+{
+	/*border: 1px solid;*/
+	display: inline-flex;
+	text-align: center;
+	margin: 20px;
+	padding-bottom: 0px;
+	box-shadow: 1px 1px 10px #e6eeef;
+}
+
+.tile img
+{
+	display: inline-block;
+}
+div .comic-data
+{
+	text-align: left;
+	display: inline-block;
+	margin: 15px;
+	width: 300px;
+}
+
+div .comic-detail
+{
+	font-size: 15px;
+	display: block;
+	margin: 5px 0px;
+}
+
+#seemore h4
+{
+	margin-top: 55px;
+	display: inline-block;
+	float: right;
+	margin-right: 10px;
+}

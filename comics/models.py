@@ -7,8 +7,10 @@ import os, random
 
 class Comic(models.Model):
 	title 			= models.CharField(max_length = 120)
+	author			= models.CharField(max_length = 120)
+	artist			= models.CharField(max_length = 120)
 	description		= models.TextField()
-	cover 			= models.ImageField(blank = True, default = 'no-image.png')
+	cover 			= models.ImageField()
 	status			= models.PositiveSmallIntegerField(default = True)				 # 1 = Working,		2 = on Hold,	0 = Dropped , hidden = 4
 	views_cnt		= models.PositiveIntegerField(default = 0)
 

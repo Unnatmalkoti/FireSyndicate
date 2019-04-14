@@ -1,7 +1,10 @@
 from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect,HttpResponse, Http404
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (CreateView, DetailView, ListView, UpdateView, DeleteView)
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .forms import ChapterCreateForm, ChapterImagesForm, ComicCreateForm, LoginForm
 from .models import Chapter,Comic,Page
@@ -19,6 +22,7 @@ def home_view(request):
 	return render(request, 'comics/home.html',context)
 
 class ComicListView(ListView):
+
 	template_name='comics/comic_list.html'
 	queryset = Comic.objects.all()
 
@@ -28,7 +32,7 @@ def comic_detail_view(request, pk):
 	current_comic = get_object_or_404(Comic, pk =pk)
 	current_comic.views_cnt += 1
 	current_comic.save()
-	queryset = Chapter.objects.filter(comic = current_comic)
+	queryset = Chapter.objects.filter(comic = current_comic).order_by("-created_at")
 
 	context = {
 	'object_data'	: current_comic,
@@ -37,17 +41,23 @@ def comic_detail_view(request, pk):
 	return render(request, 'comics/comic_detail.html', context)
 
 #Comic Create View
-class ComicCreateView(CreateView):
+class ComicCreateView(LoginRequiredMixin,CreateView):
+	Login_url = '/login/'
+	redirect_field_name = ''
 	template_name = "comics/comic_create.html"
 	form_class = ComicCreateForm
 
 #Comic Update View
-class ComicUpdateView(CreateView):
+class ComicUpdateView(LoginRequiredMixin,CreateView):
 	template_name = "comics/comic_create.html"
 	form_class = ComicCreateForm
+	login_url = '/login/'
+	redirect_field_name = ''
 
 #Comic Delete View
-class ComicDeleteView(DeleteView):
+class ComicDeleteView( LoginRequiredMixin,DeleteView):
+	login_url = '/login/'
+	redirect_field_name = ''
 	queryset = Comic.objects.all()
 	template_name = "comics/comic_delete.html"
 
@@ -78,6 +88,8 @@ def chapter_view(request, pk):
 
 #Chapter Create View
 def chapter_create_view(request, pk):
+	if request.user.is_authenticated is not True:
+		raise Http404
 	current_comic = get_object_or_404(Comic, pk = pk)
 	if (request.POST):
 		file_form = ChapterImagesForm(request.POST or None)
@@ -110,11 +122,12 @@ def chapter_create_view(request, pk):
 
 	return render(request, 'comics/chapter_create.html', context)
 
-
 #Comic Delete View
-class ChapterDeleteView(DeleteView):
+class ChapterDeleteView(LoginRequiredMixin,DeleteView):
 	queryset = Chapter.objects.all()
 	template_name = "comics/comic_delete.html"
+	login_url = '/login/'
+	redirect_field_name = ''
 
 	def get_success_url(self):
 		return reverse('comic-view')
