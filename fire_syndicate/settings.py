@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'txw!_rv4wd3ftzbi^kv8k86%)9$ite00%=0(1p9p42xo9wv(b5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -75,12 +75,23 @@ WSGI_APPLICATION = 'fire_syndicate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        'NAME': "sitedb",
+        'HOST' :"mongodb+srv://unnat:nonstop98@firesyndicate-9aarz.mongodb.net/test?retryWrites=true",
+        'USER' : "unnat",
+        'PASSWORD' : "nonstop98"
     }
 }
+
 
 
 # Password validation

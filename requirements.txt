@@ -1,5 +1,9 @@
-Django==2.2
-mysqlclient==1.4.2.post1
+dataclasses==0.6
+Django==2.2.1
+djongo==1.2.32
+dnspython==1.16.0
+gunicorn==19.9.0
+Pillow==6.0.0
+pymongo==3.8.0
 pytz==2019.1
-sqlparse==0.3.0
-whitenoise==3.2
+sqlparse==0.2.4

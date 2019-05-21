@@ -20,8 +20,8 @@
 					<a href="{% url "comic-detail" comic.pk%}"><h3>{{comic.title}}</h3></a>
 
 					<div class="comic-detail">
-					<p>Author : </p>
-					<p>Artist : </p>
+					<p>Author : {{comic.author}}</p>
+					<p>Artist : {{comic.artist}}</p>
 					<p>Views : {{comic.views_cnt}}</p>
 					<a id="seemore" href="{% url "comic-detail" comic.pk%}"><h4>See more</h4></a>
 					</div>

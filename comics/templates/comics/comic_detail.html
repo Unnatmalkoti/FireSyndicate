@@ -17,8 +17,8 @@
 	{%endif%}
 	</div>
 	<div class="comic-desc">
-		<p><strong>Author : </strong></p>
-		<p><strong>Artist : </strong></p>
+		<p><strong>Author : </strong>{{object_data.author}}</p>
+		<p><strong>Artist : </strong>{{object_data.artist}}</p>
 		<p><strong>Description : </strong>{{object_data.description}}</p>
 		<p><strong>Views : </strong>{{object_data.views_cnt}}</p><br>
 		{%if user.is_authenticated%}
