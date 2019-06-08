@@ -1,0 +1,35 @@
+.section-heading
+{
+	font-size: 30px;
+/*	line-height: 40px;*/
+	padding-bottom: 10px;
+}
+
+.section
+{
+	margin-bottom: 50px;
+}
+
+div .tile
+{
+	/*border: 1px solid;*/
+	display: inline-block;
+	text-align: center;
+	margin: 20px;
+	padding-bottom: 0px;
+	box-shadow: 1px 1px 10px #e6eeef;
+}
+
+.tile img
+{
+	display: block;
+}
+
+#tile-title
+{
+	font-size: 13px;
+	margin: 7px 3px;
+	display: inline-block; 
+	font-family: "raleway";
+	font-weight: 300;
+}

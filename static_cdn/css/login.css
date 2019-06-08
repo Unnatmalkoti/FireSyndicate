@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+:root
+{
+    font-size:16px;
+}
+
+*{
+    margin:0px;
+    padding: 0px;
+    font-family: roboto;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: linear-gradient(to bottom right, #292826, #4B4B4B);
+    width: 100vw;
+    min-height: 100vh;
+}
+.form-title
+{
+font-size: 30px;
+color:white;
+text-align: center;
+margin-bottom: 30px;
+}
+
+.login-div
+{
+background-color: rgba(255, 255, 255, 0.2);
+width: 450px;
+
+padding: 65px 50px 80px 50px;
+display: inline-block;
+position: absolute;
+top :50%; left : 50%;
+transform: translate(-50%,-50%);
+}
+
+.errorlist
+{
+    color:white;
+    list-style: none;
+    font-size: 0.9em;
+    margin-top: -10px;
+    
+}
+
+.login-field
+{
+    display: block;
+    width: 100%;
+    font-size: 0.95em;
+    padding:10px 15px;
+    margin: 20px 0;  
+    border-style: none;
+    background-color: #CACACA;
+    box-shadow: #292826 0px 0px 10px -4px;
+}
+
+.login-btn
+{
+    width: 100%;
+    color: white;
+    font-size: 1rem;
+    height: 40px;
+    background-color:#FF6D09; 
+    border-style: none;
+    cursor: pointer;
+    box-shadow: #292826 0px 0px 10px -4px;
+}
+
+.login-btn:hover
+{
+    opacity: 0.9;
+}
+
+@media (max-width:500px)
+{
+    body
+    {
+        background-color: rgba(255, 255, 255, 0.2);
+        
+    }
+    .login-div
+    {
+        background-color: transparent;
+        width: 100%;
+        padding: 0 25px;
+        padding-bottom: 20px;
+    }
+}
