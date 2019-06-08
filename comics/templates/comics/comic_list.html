@@ -2,9 +2,10 @@
 {% block content %}
 {%load static%}
 
-{%block css%}
+{%block head%}
 <link rel="stylesheet" href="{% static "css/comic-list.css"%}">
-{%endblock css%}
+<meta name="active-link" value="series-link">
+{%endblock head%}
 
 <h1>All Comics</h1>
 <div clss="tile-wrapper">
@@ -20,8 +21,8 @@
 					<a href="{% url "comic-detail" comic.pk%}"><h3>{{comic.title}}</h3></a>
 
 					<div class="comic-detail">
-					<p>Author : {{comic.author}}</p>
-					<p>Artist : {{comic.artist}}</p>
+					<p>Author : </p>
+					<p>Artist : </p>
 					<p>Views : {{comic.views_cnt}}</p>
 					<a id="seemore" href="{% url "comic-detail" comic.pk%}"><h4>See more</h4></a>
 					</div>

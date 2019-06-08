@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'storages',
+    'widget_tweaks',
+
     "comics",
 ]
 
@@ -75,23 +78,22 @@ WSGI_APPLICATION = 'fire_syndicate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': "sitedb",
-        'HOST' :"mongodb+srv://unnat:nonstop98@firesyndicate-9aarz.mongodb.net/test?retryWrites=true",
-        'USER' : "unnat",
-        'PASSWORD' : "nonstop98"
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': "sitedb",
+#         'HOST' :"mongodb+srv://unnat:nonstop98@firesyndicate-9aarz.mongodb.net/test?retryWrites=true",
+#         'USER' : "unnat",
+#         'PASSWORD' : "nonstop98"
+#     }
+# }
 
 
 # Password validation
@@ -133,11 +135,27 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS =[os.path.join(BASE_DIR,"static")]
-STATIC_ROOT = os.path.join(BASE_DIR,"static_cdn")
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 LOGIN_REDIRECT_URL  = '/'
 LOGOUT_REDIRECT_URL  = '/'
+
+if True:
+    AWS_ACCESS_KEY_ID = 'AKIAZ4MKS6I5N66PF4G3'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'firesyndicate-media'
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+    AWS_LOCATION = 'static'
+
+    STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    DEFAULT_FILE_STORAGE = 'fire_syndicate.storage_backends.MediaStorage' 
+    MEDIA_URL = '/media/'
+
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR,"static_cdn")
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

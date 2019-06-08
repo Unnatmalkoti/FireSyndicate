@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import ( ComicCreateView, ComicListView, ComicUpdateView, comic_detail_view, ComicDeleteView,
-  chapter_view, chapter_create_view, ChapterDeleteView)
+  chapter_view, chapter_create_view, ChapterDeleteView, test_view)
 
 urlpatterns = [ path('',ComicListView.as_view(), name='comic-view'),
 				path('<int:pk>',comic_detail_view, name='comic-detail'),
@@ -11,6 +11,6 @@ urlpatterns = [ path('',ComicListView.as_view(), name='comic-view'),
 
 				path('chapter/<int:pk>',chapter_view, name='chapter-view'),
 				path('<int:pk>/chapter/create/', chapter_create_view, name='chapter-create'),
-				path('chapter/delete/<int:pk>',ChapterDeleteView.as_view(), name='chapter-delete')
-				
+				path('chapter/delete/<int:pk>',ChapterDeleteView.as_view(), name='chapter-delete'),
+				path('test/', test_view, name="test-view")
 			]

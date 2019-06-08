@@ -1,48 +1,56 @@
+
 {%load static%}
+
 <!doctype html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Untitled</title>
+        <title>Fire Syndicate</title>
         <link rel="stylesheet" href="{% static "css/layout.css"%}">
         <link rel="author" href="humans.txt">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Raleway:400" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
 
+        {%block head%}
 
-        {%block css%}
-
-        {%endblock css%}
+        {%endblock head%}
     </head>
     <body>
-        {%block navbar%}
-        <nav>
-            <div class = "nav-content">
-                <div class="site-name">
-                    <p>Fire Syndicate</p>
-                </div>
-                <div class="nav-links">
-
-                    <ul>
-                        <li><a href="{% url "home"%}">Home</a></li><!--
-                     --><li><a href="{% url "comic-view"%}">List</a></li><!--
-                     --><li><a href="https://discord.gg/N5QR9PJ">Discord</a></li>
-                        <li id="login">   
-                            {%if user.is_authenticated%}
-
-                                <a href="{% url "logout" %}">Logout</a>
-                                {%else%}
-                                <a href="{% url "login" %}">Login</a>
-                                {%endif%}
-                        </li>
-                    </ul>
-                    
-                </div>
+        {%block header%} 
+        <header>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
+            <div class="site-name">
+                <h1>Fire Syndicate</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li id="home-link" ><a href ="{% url "home"%}">Home</a></li>
+                    <li id="series-link" ><a href ="{% url "comic-view"%}">Series</a></li>
+                    <li><a href =#>Staff</a></li>
+                    <li><a href ="https://discord.gg/N5QR9PJ">Discord</a></li>
+                </ul>
+                <div class="search">
+                    <form>
+                        <input type="text" placeholder="Search" class = "search-bar">
+                    </form>
+                    {% comment %} <span>
+                        {%if user.is_authenticated%}
+                        Hi, {{user.username|title}}. <a href="{% url 'logout'%}">Logout</a>
+                        {%else%}
+                        <a href="{% url 'login'%}">Login</a>
+                        {%endif%}
+                    </span> {% endcomment %}
+                </div>
+            </nav>
+            </header>
 
-        </nav>
-        {%endblock navbar%}
+        {%endblock header%}
 
         <div class="wrapper">
                 
@@ -50,6 +58,6 @@
             
             {%endblock content%}
         </div>
-        <script src="js/main.js"></script>
+        <script src="{%static 'js/layout.js'%}"></script>
     </body>
 </html>

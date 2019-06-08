@@ -2,9 +2,10 @@
 
 {%load static%}
 
-{%block css%}
+{%block head%}
 <link rel="stylesheet" href="{% static "css/comic-viewer.css"%}">
-{%endblock css%}
+<meta name="active-link" value="series-link">
+{%endblock head%}
 
 {% block content %}
 
@@ -13,7 +14,7 @@
 
 <div class="image-wrapper">
 {% for page in queryset %}
-	<img src='{{ page.image.url}}' class ="content-image"/>
+<img src='{{ page.image.url}}' class ="content-image"/>
 {% endfor %}
 </div>
 

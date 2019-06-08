@@ -1,0 +1,15 @@
+{%extends 'layout.html' %}
+
+{%block content%}
+
+<iframe id="iframe"></iframe>
+
+<script type="text/javascript">
+var doc = document.getElementById('iframe').contentWindow.document;
+doc.open();
+doc.write('<img id=\'img\' src=\"http://localhost:8000/media/e2d49c2ecbd3c1993b5471b4679c8b4c--list-bleach.jpg\">');
+
+
+doc.close();
+</script>
+{%endblock%}

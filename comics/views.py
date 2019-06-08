@@ -1,4 +1,6 @@
-from django.shortcuts import render,get_object_or_404
+
+from django.shortcuts import render,get_object_or_404, redirect
+
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect,HttpResponse, Http404
 from django.urls import reverse
@@ -6,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (CreateView, DetailView, ListView, UpdateView, DeleteView)
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-from .forms import ChapterCreateForm, ChapterImagesForm, ComicCreateForm, LoginForm
+from .forms import ChapterCreateForm, ChapterImagesForm, ComicCreateForm
 from .models import Chapter,Comic,Page
 
 def home_view(request):
@@ -20,6 +22,9 @@ def home_view(request):
 	"PopularComics" : qs2
 	}
 	return render(request, 'comics/home.html',context)
+
+
+##Comic - Views
 
 class ComicListView(ListView):
 
@@ -42,17 +47,18 @@ def comic_detail_view(request, pk):
 
 #Comic Create View
 class ComicCreateView(LoginRequiredMixin,CreateView):
-	Login_url = '/login/'
-	redirect_field_name = ''
-	template_name = "comics/comic_create.html"
+	login_url = '/login/'
 	form_class = ComicCreateForm
+	template_name = "comics/comic_create.html"
 
 #Comic Update View
 class ComicUpdateView(LoginRequiredMixin,CreateView):
 	template_name = "comics/comic_create.html"
 	form_class = ComicCreateForm
+	model = Comic
 	login_url = '/login/'
 	redirect_field_name = ''
+
 
 #Comic Delete View
 class ComicDeleteView( LoginRequiredMixin,DeleteView):
@@ -62,7 +68,12 @@ class ComicDeleteView( LoginRequiredMixin,DeleteView):
 	template_name = "comics/comic_delete.html"
 
 	def get_success_url(self):
-		return reverse('comic-list')
+		return reverse('comic-view')
+
+
+
+
+##Chapter - Views
 
 #Chapter View
 def chapter_view(request, pk):
@@ -92,13 +103,13 @@ def chapter_create_view(request, pk):
 		raise Http404
 	current_comic = get_object_or_404(Comic, pk = pk)
 	if (request.POST):
-		file_form = ChapterImagesForm(request.POST or None)
+		file_form = ChapterImagesForm(request.POST or None, request.FILES or None)
 		form = ChapterCreateForm(request.POST or None)
 		form.comic = current_comic
 		
 		print (file_form)
 
-		if form.is_valid():
+		if form.is_valid() and file_form.is_valid():
 			saved_chapter = form.save()
 			image_files = request.FILES.getlist("images")
 
@@ -107,7 +118,7 @@ def chapter_create_view(request, pk):
 				temp_page = Page(image=file, chapter = saved_chapter, page_number= countr)
 				countr = countr + 1
 				temp_page.save()
-
+			return redirect("chapter-view",saved_chapter.pk)
 			#return HttpResponseRedirect(saved_chapter.get_absolute_url) 	
 	else:
 		form = ChapterCreateForm(initial={'comic': current_comic})
@@ -122,7 +133,7 @@ def chapter_create_view(request, pk):
 
 	return render(request, 'comics/chapter_create.html', context)
 
-#Comic Delete View
+#Chapter Delete View
 class ChapterDeleteView(LoginRequiredMixin,DeleteView):
 	queryset = Chapter.objects.all()
 	template_name = "comics/comic_delete.html"
@@ -131,5 +142,13 @@ class ChapterDeleteView(LoginRequiredMixin,DeleteView):
 
 	def get_success_url(self):
 		return reverse('comic-view')
+
+
+################################################
+#Testing stuff
+################################################
+
+def test_view(request):
+	return render(request,'comics/test.html',{})
 
 
