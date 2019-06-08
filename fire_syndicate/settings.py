@@ -139,7 +139,7 @@ STATICFILES_DIRS =[os.path.join(BASE_DIR,"static")]
 LOGIN_REDIRECT_URL  = '/'
 LOGOUT_REDIRECT_URL  = '/'
 
-if True:
+if False:
     AWS_ACCESS_KEY_ID = 'AKIAZ4MKS6I5N66PF4G3'
     AWS_SECRET_ACCESS_KEY = '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'
     AWS_STORAGE_BUCKET_NAME = 'firesyndicate-media'
@@ -154,6 +154,7 @@ if True:
 
     DEFAULT_FILE_STORAGE = 'fire_syndicate.storage_backends.MediaStorage' 
     MEDIA_URL = '/media/'
+    AWS_DEFAULT_ACL = None
 
 else:
     STATIC_ROOT = os.path.join(BASE_DIR,"static_cdn")
