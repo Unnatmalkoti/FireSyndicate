@@ -20,9 +20,17 @@ div .tile
 	box-shadow: 1px 1px 10px #e6eeef;
 }
 
+.tile:hover
+{
+	box-shadow: 0px 0px 8px #ff6d0d54;
+}
+
 .tile img
 {
 	display: block;
+	width: 200px;
+	object-fit: cover;
+	height: 300px;
 }
 
 #tile-title

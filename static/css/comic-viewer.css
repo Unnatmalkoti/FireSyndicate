@@ -2,13 +2,12 @@
 		width :100%;
 	max-width: 900px;
 	min-width: 400px;
-
-
 }
 
 .image-wrapper
 {
 	text-align: center;
+	line-height: 0px;
 }
 
 .comic-title
@@ -22,4 +21,14 @@
 	font-size: 18px;
 	margin :10px;
 	display: inline-block;
+}
+
+@media(max-width:600px)
+{
+	.content-image{
+		width: 100vw;
+		min-width: unset;
+		margin-left: -40px;
+		margin-right: -40px;
+	}
 }
