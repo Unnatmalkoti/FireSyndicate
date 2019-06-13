@@ -1,8 +1,61 @@
 {%extends 'layout.html' %}
+{%load static%}
+{%load widget_tweaks%}
+
+{%block head%}
+<title>Add a Comic</title>
+<link rel="stylesheet" href="{%static 'css/forms/create-form.css'%}">
+<meta name="active-link" value="series-link">
+{%endblock head%}
 
 {%block content%}
-<form method="POST" enctype="multipart/form-data"> {% csrf_token %}
-	{{ form.as_p }}
-	<input type="submit" name="Create Comic">
-</form>
+<section>
+	<div class="section-heading">Add a Comic</div>	
+	<form class="comic-form" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+		{{form.non_field_errors}}
+		<div class="flex">
+			<div class="comic-cover">
+				<div class="icon-tray">
+				<img src="{%static 'assets/add-symbol-circle.svg'%}">
+				<span>Add a cover</span>
+				</div>
+				{{form.cover.errors}}
+			</div>
+			
+			
+			<div class="form-body">
+				
+				{%render_field form.title placeholder="Enter Comic Title" class="title"%}{{form.title.errors}}
+				
+				<table>
+				<tr class="secondary-fields">
+					<td><label for="author">Author: </label></td>
+					<td>{%render_field form.author placeholder="Author Name" id="author"%}{{form.author.errors}}</td>
+				</tr>
+
+				<tr class="secondary-fields">
+					<td><label for="artist">Artist: </label></td>
+					<td>{%render_field form.artist placeholder="Artist Name" id="artist"%}{{form.artist.errors}}</td>
+				</tr>
+
+				<tr class="secondary-fields">
+					<td><label for="status">Status: </label></td>
+					<td>{%render_field form.status placeholder="Status" id="status"%}{{form.status.errors}}</td>
+				</tr>
+				<tr class="secondary-fields">
+					<td><label for="desc">Description: </label></td>
+					<td>{%render_field form.description id="desc" class="desc" placeholder="Description"%}{{form.description.errors}}</td>
+				</tr>
+				</table>
+				{%render_field form.cover id="file-field" style="display:none"%}
+				
+			</div>	
+		</div>
+		<div class="button-tray">
+			<input type="button" value="Cancel" class="secondary-btn button"><input class="primary-btn button" type="submit" value="Add">
+		</div>
+	</form>
+
+</section>
+<script src="{%static 'js/comic-create.js'%}"></script>
 {%endblock%}

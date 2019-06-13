@@ -1,5 +1,8 @@
-
+from PIL import Image
 from django.shortcuts import render,get_object_or_404, redirect
+
+from django.core.validators import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect,HttpResponse, Http404
@@ -12,15 +15,22 @@ from .forms import ChapterCreateForm, ChapterImagesForm, ComicCreateForm
 from .models import Chapter,Comic,Page
 
 def home_view(request):
-	qs = Chapter.objects.order_by("-created_at")[0:5]
-	qs2 = Comic.objects.order_by("-views_cnt")[0:10]
 
-	print (qs)
-	print ("hi")
-	context = {
-	"LatestChapters" : qs,
-	"PopularComics" : qs2
-	}
+
+	SearchQuery= request.GET.get("query")
+	if SearchQuery:
+		SearchQuerySet = Comic.objects.filter(title__icontains= SearchQuery)
+		context = {
+			"SearchQuerySet": SearchQuerySet
+		}
+	else:
+		qs = Chapter.objects.order_by("-created_at")[0:5]
+		qs2 = Comic.objects.order_by("-views_cnt")[0:10]
+		context = {
+			"LatestChapters" : qs,
+			"PopularComics" : qs2,
+		}
+
 	return render(request, 'comics/home.html',context)
 
 
@@ -81,16 +91,19 @@ def chapter_view(request, pk):
 	current_chapter = get_object_or_404(Chapter, pk = pk)
 	queryset = Page.objects.filter(chapter = current_chapter)
 	current_comic = current_chapter.comic
-
+	
 	current_comic.views_cnt += 1
 	current_chapter.views_cnt += 1
-	
+
+	prevNext = current_chapter.getPrevNextCh()
 	current_chapter.save()
 	current_comic.save()
 
 	context = {
 	'object_data'	: current_chapter,
-	'queryset'		: queryset
+	'queryset'		: queryset,
+	'prevCh'	: prevNext['prevCh'],
+	'nextCh'	: prevNext['nextCh'],
 	}
 	print (queryset)
 	return render(request, 'comics/comic_viewer.html', context)
@@ -103,16 +116,17 @@ def chapter_create_view(request, pk):
 		raise Http404
 	current_comic = get_object_or_404(Comic, pk = pk)
 	if (request.POST):
-		file_form = ChapterImagesForm(request.POST or None, request.FILES or None)
+		file_form = ChapterImagesForm(request.POST or None, request.FILES or None, images= request.FILES.getlist("images") or None)
 		form = ChapterCreateForm(request.POST or None)
 		form.comic = current_comic
 		
-		print (file_form)
+		image_files = request.FILES.getlist("images")
+
 
 		if form.is_valid() and file_form.is_valid():
 			saved_chapter = form.save()
-			image_files = request.FILES.getlist("images")
 
+			
 			countr = 1
 			for file in image_files:
 				temp_page = Page(image=file, chapter = saved_chapter, page_number= countr)

@@ -1,0 +1,82 @@
+
+.section-heading
+{
+	font-size: 30px;
+
+	padding-bottom: 10px;
+}
+.comic-cover
+{
+    height: 322px;
+    border: 1px solid grey;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 230px;
+}
+.comic-cover .icon-tray
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.comic-form
+{
+    display: flex;
+    margin: 50px 0px;
+}
+
+.form-body
+{
+    margin: 0 50px;
+}
+
+input.title
+{
+    font-size: 1.5rem;
+    border-style: none;
+    
+    column-span: all;
+    margin-bottom: 20px;
+}
+.secondary-fields
+{
+
+    font-size: 1.2rem;
+    margin: 10px 0;
+
+}
+
+.secondary-fields input, label, textarea
+{
+
+    font-size: 1.2rem;
+    border-style: none;
+}
+
+.secondary-fields input
+{
+    color: grey;
+
+}
+
+.secondary-fields td
+{
+    line-height:30px;
+    vertical-align: top;
+    padding-right:10px; 
+}
+
+.form-body textarea
+{
+    padding-top: 4px;
+}
+
+.form-body input:focus-within, textarea:focus-within
+{
+    outline: none;
+}
+

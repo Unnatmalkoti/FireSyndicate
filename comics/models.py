@@ -43,6 +43,10 @@ class Chapter(models.Model):
 	def get_absolute_url(self):
 		return reverse("chapter-view", kwargs = {'pk' : self.pk}) 
 
+	def getPrevNextCh(self):
+		nextCh = Chapter.objects.filter(comic = self.comic, pk__gt=self.pk).order_by('pk').first()
+		prevCh = Chapter.objects.filter(comic = self.comic, pk__lt=self.pk).order_by('-pk').first()
+		return { 'nextCh': nextCh, 'prevCh': prevCh}
 
 
 	ordering = ['-number']

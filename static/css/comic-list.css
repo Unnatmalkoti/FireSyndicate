@@ -1,40 +1,95 @@
-div .tile-wrapper
+
+.section-heading
+{   
+	display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 30px;
+    padding: 0 20px;
+    padding-bottom: 10px;
+}
+
+.options
+{
+	float:right;
+	font-size: 20px;
+
+}
+.options .icon
+{
+	height: 15px;
+	width: 15px;
+}
+
+.tile-wrapper
 {
 	display: inline-block;
 }
-div .tile
+.tile
 {
 	/*border: 1px solid;*/
 	display: inline-flex;
 	text-align: center;
 	margin: 20px;
 	padding-bottom: 0px;
+	color: #707070;
 	box-shadow: 1px 1px 10px #e6eeef;
 }
 
-.tile img
+.tile h3
 {
+	font-weight: 300;
+	font-size: 1.3rem;
+	color: var(--primany-accent-color);
+}
+
+.comic-cover
+{
+	border: 1px solid #efedeb;
+	width: 180px;
+	margin: 20px 0px 20px 20px;
+	height: 240px;
+	object-fit: cover;
 	display: inline-block;
 }
-div .comic-data
+.comic-data
 {
 	text-align: left;
 	display: inline-block;
-	margin: 15px;
+	margin: 0px;
+	padding: 30px 30px;
 	width: 300px;
 }
 
-div .comic-detail
+.comic-detail
 {
-	font-size: 15px;
-	display: block;
-	margin: 5px 0px;
+	font-size: 0.9rem;
+	display:block;
+	margin: 15px 0px 0 0 ;
+	line-height: 1.7rem;
+	
 }
 
-#seemore h4
+.comic-detail .desc
 {
-	margin-top: 55px;
-	display: inline-block;
-	float: right;
-	margin-right: 10px;
+	line-height: 1.55rem;
+}
+
+@media(max-width:555px)
+{
+	.tile
+	{
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+@media(max-width:1200px)
+{
+	.tile-wrapper
+	{	
+		align-items: center;
+		flex-direction: column;
+		display: flex;
+	}
 }

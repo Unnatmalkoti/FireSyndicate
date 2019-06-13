@@ -1,11 +1,35 @@
 {%extends 'layout.html' %}
+{% load widget_tweaks %}
+{%load static%}
+{%block head%}
+<link rel="stylesheet" href="{%static 'css/forms/chapter-upload-form.css'%}">
+
+{%endblock head%}
+
+
 {%block content%}
-<form method="POST" enctype= "multipart/form-data"> {% csrf_token %}
-	{{ form.as_p }}
-	{{file_form.as_p}}
+<section>
+<div class="section-heading">Upload Chapter</div>
+<form class ="upload-form"method="POST" enctype= "multipart/form-data"> {% csrf_token %}
+	{{form.non_field_errors}}
+	{{file_form.non_field_errors}}
+	{%render_field form.comic id="comic-combo-box"%}
+	<p id="comic-title"></p>
+	<span>Chapter</span>
+	{{form.number.errors}}
+	{% render_field form.number id="ch-number" placeholder="##"%}
+	{{form.name.errors}}
+	{% render_field form.name id="ch-name" placeholder="Name"%}
+	<br>
+	{{file_form.images.errors}}
+	{% render_field file_form.images id="images"%}
 
-	<input type="submit" name="Create Article">
-
+	<input type="submit" class="button primary-btn" value="Upload">
 </form>
+<section>
+<script>
+	var comboBox =document.querySelector("#comic-combo-box");
+	var seriesText = comboBox.options[comboBox.selectedIndex].text;
+	document.querySelector("#comic-title").innerText= seriesText;
+</script>
 {%endblock%}
-	<input type="file" name="Upload zip" multiple>}

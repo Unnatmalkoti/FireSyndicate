@@ -26,11 +26,11 @@ a
 
 a:visited
 {
-	color:black;
+	color:#707070;
 }
 a:link
 {
-	color:black;
+	color:#707070;
 }
 
  header
@@ -101,8 +101,80 @@ nav li:hover
 .search
 {
 	padding-right: 40px;
+}
+
+.search-bar
+{
+	
+	background-color: var(--secondary-bg-color);
+	width: 0px;
+	font-size: 0.95rem;
+	color: white;
+	
+	border: none;
+	transition: width 300ms ease-in;
+}
+
+.search-bar:focus-within
+{
+
+	border: none;
+	border-bottom: #5A5957 1px solid;
+	outline: none;
+	width: 250px;
+}
+.search-bar:focus-within ~ .search-icon
+{
 	display: none;
 }
+.icon
+{
+	width: 1em;
+	height: 1em;
+	display: inline-block;
+	cursor: pointer;
+	margin: 0 9px;
+}
+
+/* Drop down menu stlyes */
+.drop-down{
+    position: absolute;
+    transform: translate(-64px,-20px);
+	background-color: #292826;
+	display: none; 
+	transition: transform 100ms ease-in-out;
+	
+}
+
+.drop-down.active-dropdown
+{
+	display: block;
+	transform: translate(-64px,11px);
+	
+	
+}
+
+.drop-down li
+{
+	width: 180px;
+    text-align: left;
+	padding: 10px 21px;
+	
+}
+
+.drop-down li:hover
+{
+	background-color:#383735;
+}
+
+.drop-down span
+{
+	font-size: 0.95rem;
+	padding: 10px 21px;
+	display: block;
+}
+
+
 
 @media(min-width:1500px)
 {
@@ -194,4 +266,30 @@ nav li:hover
 		margin-top: 100px;
 		padding: 0 10px;
 	}	
+
+	.search
+	{
+		width: 100%;
+		display: flex;
+		margin: 10px 0;
+		text-align: left;
+		padding: 20px 25px;
+	}
+	.search-bar
+	{
+		width: 100%;
+	}
+	.search:hover, .search:hover .search-bar
+	{
+		background-color: var(--primary-accent-color);
+	}
+
+	.search-bar::placeholder
+	{
+		color: white;
+	}
+	.drop-down.active-dropdown
+	{
+		transform: translate(-20px,142px);
+	}
 }

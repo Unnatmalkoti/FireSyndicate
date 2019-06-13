@@ -35,9 +35,20 @@
                     <li onclick="goto('')">Staff</li>
                     <li onclick="goto('https://discord.gg/N5QR9PJ')">Discord</li>
                 </ul>
-                <div class="search">
-                    <form>
-                        <input type="text" placeholder="Search" class = "search-bar">
+                
+                    <form class="search" method="GET" action="/">
+                        <input type="text" placeholder="Search" class = "search-bar" name="query" value="{{request.GET.query}}">
+                        <img src="{%static 'assets/search-symbol.svg'%}" class="search-icon icon">
+                        <img src="{%static 'assets/accounts-symbol.svg'%}" class="accounts-icon icon">
+                        <ul class="drop-down" >
+                            {%if user.is_authenticated%}
+                            <Span>Hi, {{user.username|capfirst}}</span>
+                            <li onclick="goto('{%url 'logout'%}')">Logout</li>
+                            {%else%}
+                            <li onclick="goto('{%url 'login'%}')">Login</li>
+                            {%endif%}
+                        </ul>
+                        </span>
                     </form>
                     {% comment %} <span>
                         {%if user.is_authenticated%}
@@ -46,7 +57,7 @@
                         <a href="{% url 'login'%}">Login</a>
                         {%endif%}
                     </span> {% endcomment %}
-                </div>
+
             </nav>
             </header>
 

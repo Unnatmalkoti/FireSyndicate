@@ -3,8 +3,8 @@
 {%load static%}
 
 {%block head%}
-<link rel="stylesheet" href="{% static "css/comic-detail.css"%}">
-<meta name="active-link" value="series-link">
+	<link rel="stylesheet" href="{% static "css/comic-detail.css"%}">
+	<meta name="active-link" value="series-link">
 {%endblock head%}
 
 {% block content %}
@@ -20,7 +20,7 @@
 	<div class="comic-desc">
 		<p><strong>Author : </strong>{{object_data.author}}</p>
 		<p><strong>Artist : </strong>{{object_data.artist}}</p>
-		<p><strong>Description : </strong>{{object_data.description}}</p>
+		<p><strong>Description :</strong>{{object_data.description|linebreaks}}</p>
 		<p><strong>Views : </strong>{{object_data.views_cnt}}</p><br>
 		{%if user.is_authenticated%}
 		<p><strong><a href="{% url "chapter-create" object_data.pk%}">Upload a Chapter</a></strong></p>

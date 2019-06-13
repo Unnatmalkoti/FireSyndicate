@@ -8,9 +8,35 @@
 
 
 {%block content%}
+{%if request.GET.query%}
+
+		<div class="section">
+			<div class ="section-heading">Search Results ({{SearchQuerySet|length}})</div>
+			<div class ="tile-wrapper">
+				{%if SearchQuerySet%}
+				{%for comic in SearchQuerySet%}
+				<a href="{% url "comic-detail" comic.pk%}">
+					<div class="tile"> 
+						{%if comic.cover%}
+
+						<img src="{{comic.cover.url}}" class="comic-cover" height='300'>
+						{%endif%}
+						<div id="tile-title">
+						<a  href="{% url "comic-detail" comic.pk%}">{{comic.title}}</a>
+					</div>
+					</div>
+				</a>
+				{%endfor%}
+				{%else%}
+				<h3>No results found.</h3>
+				{%endif%}
+
+			</div>
+		</div>
+{% else %}
 <div class="section">
 	<div class ="section-heading">Latest</div>
-		<div class ="tile-wrapper">
+	<div class ="tile-wrapper">
 			{% for chapter in LatestChapters %}
 		<a href="{% url "chapter-view" chapter.pk%}">
 			<div class="tile"> 
@@ -50,4 +76,5 @@
 		{% endfor %}
 	<div>
 </div>
+{%endif%}
 {%endblock%}

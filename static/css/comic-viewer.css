@@ -22,6 +22,13 @@
 	margin :10px;
 	display: inline-block;
 }
+.prev-next
+{
+	display: flex;
+	justify-content: space-between;
+	padding: 0px 10px;
+
+}
 
 @media(max-width:600px)
 {
