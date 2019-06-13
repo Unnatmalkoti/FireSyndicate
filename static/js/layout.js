@@ -110,12 +110,14 @@ nav.addEventListener("touchend",(event)=>{
 
 body.addEventListener("touchend",(event)=>{
     nav.style.transition = "";
-    if(change > 100)
+    if(change > 50 && validTouch)
+        nav.classList.add("nav-active");
+    else if(change>100)
         nav.classList.add("nav-active");
     if (change==0)
         nav.classList.remove("nav-active");
 
-    if(change < -100)
+    if(change < -50)
         nav.classList.remove("nav-active");
     nav.style.removeProperty('transform');
 });
