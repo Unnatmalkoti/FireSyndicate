@@ -7,11 +7,19 @@ import os, random
 
 # Create your models here.
 
+
+class Tag(models.Model):
+	name = models.CharField(max_length=50)
+	created_at = models.DateTimeField( auto_now= True)
+	def __str__(self):
+		return "{title}".format(title = self.name)
+
 class Comic(models.Model):
 	title 			= models.CharField(max_length = 120)
 	author			= models.CharField(max_length = 120)
 	artist			= models.CharField(max_length = 120)
 	description		= models.TextField()
+	tags			= models.ManyToManyField(Tag, verbose_name="Tags")
 	cover 			= models.ImageField(upload_to="")
 	status			= models.PositiveSmallIntegerField(default = True)				 # 1 = Working,		2 = on Hold,	0 = Dropped , hidden = 4
 	views_cnt		= models.PositiveIntegerField(default = 0)
@@ -19,6 +27,8 @@ class Comic(models.Model):
 	def __str__(self):
 		return "{title}".format(title = self.title)
 
+	def getLatestChapter(self):
+		return Chapter.objects.filter(comic = self).order_by("-pk").first()
 	def get_absolute_url(self):
 		return reverse("comic-detail", kwargs = {'pk' : self.pk}) 
 
@@ -70,3 +80,16 @@ def submission_delete(sender, instance, **kwargs):
 @receiver(post_delete, sender=Comic)
 def submission_delete(sender, instance, **kwargs):
     instance.cover.delete(False) 
+
+
+#Slider Image
+
+class Slide(models.Model):
+	comic = models.ForeignKey("Comic", on_delete=models.CASCADE, null = True, blank =True)
+	image = models.ImageField(upload_to="")
+	title = models.CharField(blank = True, null =True , max_length=100)
+	description = models.TextField(null = True, blank =True)
+	link = models.URLField("Hyperlink", max_length=200, blank =True , null =True)
+	orderNumber = models.SmallIntegerField("Order Number", unique = True)
+
+	

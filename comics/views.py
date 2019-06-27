@@ -12,7 +12,7 @@ from django.views.generic import (CreateView, DetailView, ListView, UpdateView, 
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .forms import ChapterCreateForm, ChapterImagesForm, ComicCreateForm
-from .models import Chapter,Comic,Page
+from .models import Chapter,Comic,Page, Slide
 
 def home_view(request):
 
@@ -24,11 +24,13 @@ def home_view(request):
 			"SearchQuerySet": SearchQuerySet
 		}
 	else:
+		qs3 = Slide.objects.order_by("orderNumber")
 		qs = Chapter.objects.order_by("-created_at")[0:5]
 		qs2 = Comic.objects.order_by("-views_cnt")[0:10]
 		context = {
 			"LatestChapters" : qs,
 			"PopularComics" : qs2,
+			"Slides":qs3,
 		}
 
 	return render(request, 'comics/home.html',context)

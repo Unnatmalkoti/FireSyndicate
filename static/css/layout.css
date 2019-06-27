@@ -201,6 +201,7 @@ nav li:hover
 {
 	header
 	{
+		z-index: 9999;
 		top:0%;
 		position: fixed;
 		width: 100vw;
@@ -215,7 +216,7 @@ nav li:hover
 		box-shadow: 0px 10px 8px 0 #1d1d1d70;
 	}
 	nav
-	{		
+	{	
 		flex-direction: column;	
 		width: 250px;
 		justify-content: center;
@@ -251,9 +252,15 @@ nav li:hover
 
 	.hamburger
 	{
+		padding: 10px;
+    	margin: -10px;
 		position: absolute;
 		top: 1rem;
 		left: 1.2rem;
+	}
+	.hamburger:active
+	{
+		background-color: #383735;
 	}
 
 	.nav-active

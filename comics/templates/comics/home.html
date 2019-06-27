@@ -4,7 +4,39 @@
 {%block head%}
 <link rel="stylesheet" href="{% static "css/home.css"%}">
 <meta name="active-link" value="home-link">
+
 {%endblock head%}
+
+{%block slider%}
+{%if Slides|length%}
+
+	<div class="slider-container">
+		<div class="arrow left" id="left-arrow"><img src="{%static 'assets/left-arrow-slider.svg' %}"></div>
+		<div class="arrow right" id="right-arrow"><img src="{%static 'assets/right-arrow-slider.svg' %}"></div>
+		<div class="slider-content">
+		{%for Slide in Slides%}
+			<div class="slide" onclick="goto('{%url "chapter-view" Slide.comic.getLatestChapter.pk %}')" order="{{Slide.orderNumber}}">
+					<div class="left-div">
+					<div class="slide-content">
+							<h1>{{Slide.comic.title}}</h1>
+							<p>{{Slide.comic.description|truncatewords:35}}</p>
+							{%if Slide.comic.getLatestChapter%}
+							<a href= '{%url "chapter-view" Slide.comic.getLatestChapter.pk %}'> Read Chapter {{Slide.comic.getLatestChapter.number|floatformat}} </a>
+							{%endif%}
+					</div>
+				</div>
+
+					<img class="slide-image" src ={{Slide.image.url}} />
+
+
+			</div>
+		{%endfor%}
+		
+		</div>
+	</div>
+{%endif%}
+{%endblock slider%}
+
 
 
 {%block content%}
@@ -34,6 +66,10 @@
 			</div>
 		</div>
 {% else %}
+
+
+
+
 <div class="section">
 	<div class ="section-heading">Latest</div>
 	<div class ="tile-wrapper">
@@ -77,4 +113,5 @@
 	<div>
 </div>
 {%endif%}
+<script src="{%static 'js/home.js'%}"> </script>
 {%endblock%}

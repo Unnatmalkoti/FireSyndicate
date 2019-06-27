@@ -4,7 +4,7 @@ const navslide = ()=>
     var hamburger = document.querySelector(".hamburger");
     hamburger.addEventListener("click", (event)=>
     {   
-        event.stopImmediatePropagation();
+        event.stopPropagation();
         console.log("toggled nav-active")
         nav.classList.toggle("nav-active");
         
@@ -114,8 +114,7 @@ body.addEventListener("touchend",(event)=>{
         nav.classList.add("nav-active");
     else if(change>100)
         nav.classList.add("nav-active");
-    if (change==0)
-        nav.classList.remove("nav-active");
+
 
     if(change < -50)
         nav.classList.remove("nav-active");
