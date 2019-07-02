@@ -5,3 +5,4 @@
 !.elasticbeanstalk/*.global.yml
 /fire_syndicate/settings/local
 /media
+db.sqlite3
