@@ -9,10 +9,14 @@
 
 {% block content %}
 
+
+<div class="title-row">
 <a href="{%url "comic-detail" object_data.comic.pk%}"><span class="comic-title"><strong>{{object_data.comic.title }}</strong></span></a>
 <span class="chapter-title">Chapter {{object_data.number |floatformat}} - {{object_data.name}}</span>
+</div>
 
-<div class="prev-next">{%if prevCh%}<a href="{%url 'chapter-view' prevCh.pk %}">&lt;Previous Chapter</a>{% endif %}{%if nextCh%}<a href="{%url 'chapter-view' nextCh.pk %}"Next Chapter>Next Chapter&gt;</a>{% endif %}</div>
+
+<div class="prev-next">{%if prevCh%}<a style="float:left;" href="{%url 'chapter-view' prevCh.pk %}">&lt;Previous Chapter</a>{% endif %}{%if nextCh%}<a style="float:right;" href="{%url 'chapter-view' nextCh.pk %}"Next Chapter>Next Chapter&gt;</a>{% endif %}</div>
 
 <div class="image-wrapper">
 {% for page in queryset %}

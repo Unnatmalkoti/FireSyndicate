@@ -15,7 +15,7 @@
 		<div class="arrow right" id="right-arrow"><img src="{%static 'assets/right-arrow-slider.svg' %}"></div>
 		<div class="slider-content">
 		{%for Slide in Slides%}
-			<div class="slide" onclick="goto('{%url "chapter-view" Slide.comic.getLatestChapter.pk %}')" order="{{Slide.orderNumber}}">
+			<div class="slide" {%if Slide.comic.getLatestChapter%} onclick="goto('{%url "chapter-view" Slide.comic.getLatestChapter.pk %}')" {%endif%}  order="{{Slide.orderNumber}}">
 					<div class="left-div">
 					<div class="slide-content">
 							<h1>{{Slide.comic.title}}</h1>

@@ -1,8 +1,11 @@
 .section-heading
-{
-	font-size: 30px;
-/*	line-height: 40px;*/
-	padding-bottom: 10px;
+{   
+	display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 30px;
+    padding: 0 20px;
+    padding-bottom: 10px;
 }
 
 .section
@@ -18,11 +21,20 @@ div .tile
 	margin: 20px;
 	padding-bottom: 0px;
 	box-shadow: 1px 1px 10px #e6eeef;
+	transition: box-shadow 300ms cubic-bezier(0.29, 0.05, 0.81, 0.45);
+}
+
+.tile:hover, .tile:active
+{
+	box-shadow: 0px 0px 8px #ff6d0d54;
 }
 
 .tile img
 {
 	display: block;
+	width: 200px;
+	object-fit: cover;
+	height: 280px;
 }
 
 #tile-title
@@ -32,4 +44,159 @@ div .tile
 	display: inline-block; 
 	font-family: "raleway";
 	font-weight: 300;
+}
+
+.slider-container
+{
+	position: relative;
+	overflow: hidden;
+
+}
+.slider-content
+{
+	display: flex;
+}
+.slide
+{
+	overflow: hidden;
+	width: 100%;
+	flex-shrink: 0;
+	flex-grow: 0;
+	position: relative;
+	cursor: pointer;
+    height: 430px;
+	color: white;
+	transition : trasform 300ms ease-in-out;
+
+}
+
+
+
+.slide .left-div
+{
+	clip-path: polygon(0 0, 55% 0, 45% 100%, 0 100% );
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	height: 100%;
+	background-color: #ff6d0d;
+}
+
+.image-link
+{
+	height: 100%;
+	width: 100%;
+	display: inline-block;
+}
+.slide-image{
+	z-index: -1;
+	position: absolute;
+	top:0;
+	right: 0;
+	height: 100%;
+}
+
+.slide p
+{
+	margin-top:20px;
+	padding-bottom: 25px;
+	line-height: 1.6rem;
+}
+.slide-content
+{
+	padding-left: 50px;
+
+	padding-right:57vw;
+	max-width: 1500px;
+}
+@media(min-width: 1500px)
+{
+	.slide-content
+	{
+		margin-left: calc(50vw - 1500px/2);
+		padding-right: calc(56vw + 1500px/2 - 50vw)
+	}
+}
+.slide-content a
+{
+	color: white;
+	position: absolute;
+	bottom: 50px;
+}
+
+.arrow
+{
+
+	display: flex;
+	justify-content: center;
+	flex-direction:column ;
+	align-items: center;
+z-index: 100;
+position: absolute;
+height: 100%;
+width: 100px;
+opacity: 0.1;
+transition: opacity 150ms ease-in;
+}
+.arrow:hover
+{
+	opacity: 1;
+	background-color: #ffffff11;
+	box-shadow: -1px 0px 19px 1px #0000001c
+
+}
+
+.arrow:active
+{
+	background-color: #00000011;
+    opacity: 1;
+}
+.right
+{
+	right: 0;
+}
+.arrow img
+{
+	width: 50%
+}
+
+@media(max-width:768px)
+{
+	.tile-wrapper
+	{
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.slider-container
+	{
+		margin: 56px 0;
+		z-index: 1;
+	}
+
+	.slide
+	{
+		height: 290px;
+		font-size: 0.8rem;
+	}
+	.slide-content
+	{
+		padding-left: 5vw;
+	}
+	.slide-content p
+	{
+		display: none;
+		max-height: 100px;
+		text-overflow: ellipsis;
+		white-space: pre-wrap;
+		overflow: hidden;
+		line-height: 0.7rem;
+	}
+	.slide-content h1
+	{
+		margin: 0;
+		padding-bottom: 20px;
+	}
+
 }

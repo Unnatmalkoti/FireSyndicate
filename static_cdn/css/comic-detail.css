@@ -9,14 +9,13 @@ h2{
 	display: inline-block;
 	margin-left: 20px;
 	line-height: 30px;
-	height: 400px;
 
 
 }
 
 .comic-cover
 { 	
-	float: left;
+	
 	display: inline-block;
 
 }
@@ -25,6 +24,12 @@ table
 {
 	width: 100%;
 	margin-bottom: 100px;
+}
+
+.comic-desc-div
+{
+	display: flex;
+
 }
 
 
@@ -65,4 +70,17 @@ td.delete
 {
 	margin-right: 20px;
 
+}
+
+@media(max-width:768px)
+{
+	.comic-desc-div
+	{
+		flex-wrap: wrap;
+	}
+
+	.comic-desc
+	{
+		margin-top: 20px;
+	}
 }

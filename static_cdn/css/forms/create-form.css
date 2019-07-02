@@ -1,0 +1,176 @@
+
+.section-heading
+{   
+	display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 30px;
+    padding: 0 20px;
+    padding-bottom: 10px;
+}
+.comic-cover
+{
+    height: 322px;
+    border: 1px solid grey;
+
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+
+    width: 230px;
+}
+
+ul.errorlist {
+    display: inline-block;
+    list-style: none;
+    font-size: 0.8em;
+    padding: 10px 20px;
+    background: #fff9004a;
+    font-style: italic;
+}
+.comic-cover .icon-tray
+{
+    background-color: #ffffffed;
+    padding: 13px 20px;
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.icon-tray img:hover
+{
+transform: scale(1.1 ,1.1);
+transition: transform 100ms ease-out;
+}
+.icon-tray:active
+{
+    opacity: 0.9;
+}
+
+.comic-form
+{
+    margin: 50px 0px;
+
+}
+
+.form-body
+{
+    display:inline-block;
+    margin: 0px 50px; 
+}
+
+
+.button-tray
+{
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.button
+{
+    padding: 15px 70px;
+    border-style: none;
+}
+.button:hover
+{
+    opacity: 0.9;
+}
+
+.primary-btn
+{
+    background-color: #FF6D09;
+    color: white;
+}
+.secondary-btn
+{
+    
+    color: #707070;
+}
+
+/* Input styling */
+
+input.title
+{
+    font-size: 1.5rem;
+    border-style: none;
+    
+    column-span: all;
+    margin-bottom: 20px;
+}
+
+.secondary-fields
+{   
+    
+
+    font-size: 1.2rem;
+    margin: 10px 0;
+
+}
+.secondary-fields input, label, textarea
+{
+    vertical-align: top;
+    font-size: 1.2rem;
+    border-style: none;
+}
+
+.desc
+{
+    height: 100px;
+    resize: none;
+    padding: 10px;
+
+}
+
+.wrapper
+{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+td
+{
+    vertical-align: top;
+}
+
+td:nth-child(odd)
+{
+    text-align: right;
+}
+
+label
+{
+    padding: 10px;
+    display: inline-block;
+
+}
+
+
+
+.form-body input
+{
+    padding: 10px;
+}
+
+.flex
+{
+    display: flex;
+}
+
+@media(max-width:768px)
+{
+   .flex
+   {
+    flex-wrap: wrap;
+    justify-content: center;
+   }
+
+   .form-body
+   {
+       width: 100%;
+       margin: 20px;
+   }
+    
+}

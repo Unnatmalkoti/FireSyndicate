@@ -93,7 +93,7 @@ div .tile
 	position: absolute;
 	top:0;
 	right: 0;
-	height: 430px;
+	height: 100%;
 }
 
 .slide p
@@ -173,6 +173,30 @@ transition: opacity 150ms ease-in;
 	{
 		margin: 56px 0;
 		z-index: 1;
+	}
+
+	.slide
+	{
+		height: 290px;
+		font-size: 0.8rem;
+	}
+	.slide-content
+	{
+		padding-left: 5vw;
+	}
+	.slide-content p
+	{
+		display: none;
+		max-height: 100px;
+		text-overflow: ellipsis;
+		white-space: pre-wrap;
+		overflow: hidden;
+		line-height: 0.7rem;
+	}
+	.slide-content h1
+	{
+		margin: 0;
+		padding-bottom: 20px;
 	}
 
 }

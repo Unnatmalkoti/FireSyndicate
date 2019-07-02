@@ -1,7 +1,8 @@
 from django.db import models
 from django.urls import reverse
-from django.db.models.signals import post_delete
+from django.db.models.signals import pre_delete
 from django.dispatch import receiver
+from django_cleanup.signals import cleanup_pre_delete, cleanup_post_delete
     
 import os, random
 
@@ -43,8 +44,8 @@ class Chapter(models.Model):
 	number 			= models.DecimalField(max_digits = 10,  decimal_places = 2)
 	name			= models.CharField(max_length = 120, blank = True, null = True)
 	views_cnt		= models.PositiveIntegerField(default = 0, null = False)
-	updated_at 		= models.DateTimeField(auto_now_add=True)
-	created_at 		= models.DateTimeField(auto_now=True)
+	updated_at 		= models.DateTimeField(auto_now=True)
+	created_at 		= models.DateTimeField(auto_now_add=True)
 	comic 			= models.ForeignKey(Comic,on_delete=models.CASCADE)
 
 	def __str__(self):
@@ -73,14 +74,6 @@ class Page(models.Model):
 	def __str__(self):
 		return '{id}'.format(id =self.id)
 
-@receiver(post_delete, sender=Page)
-def submission_delete(sender, instance, **kwargs):
-    instance.image.delete(False) 
-
-@receiver(post_delete, sender=Comic)
-def submission_delete(sender, instance, **kwargs):
-    instance.cover.delete(False) 
-
 
 #Slider Image
 
@@ -92,4 +85,3 @@ class Slide(models.Model):
 	link = models.URLField("Hyperlink", max_length=200, blank =True , null =True)
 	orderNumber = models.SmallIntegerField("Order Number", unique = True)
 
-	
