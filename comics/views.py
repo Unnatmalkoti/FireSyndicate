@@ -124,21 +124,12 @@ def chapter_create_view(request, pk):
 	if (request.POST):
 		#file_form = ChapterZipForm(request.POST or None, request.FILES or None, images= request.FILES.getlist("images") or None)
 		file_form = ChapterZipForm(request.POST or None, request.FILES or None)
-		form = ChapterCreateForm(request.POST or None)
+		form = ChapterCreateForm(request.POST or None)		
+
+		saved_chapter = saveChapter.save(fileForm = file_form, chapterForm = form, request = request)
 		
-		#image_files = request.FILES.getlist("images")
-		saveChapter.save(fileForm = file_form, chapterForm = form, request = request)
-		# if form.is_valid() and file_form.is_valid():
-
-		# 	saved_chapter = form.save()
-		# 	countr = 1
-		# 	for file in image_files:
-		# 		temp_page = Page(image=file, chapter = saved_chapter, page_number= countr)
-		# 		countr = countr + 1
-		# 		temp_page.save()
-
-		# 	sendNotif.send(saved_chapter)
-		# 	return redirect("chapter-view",saved_chapter.pk)
+		sendNotif.send(saved_chapter)
+		return redirect("chapter-view",saved_chapter.pk)
 			
 	else:
 		form = ChapterCreateForm(initial={'comic': current_comic})

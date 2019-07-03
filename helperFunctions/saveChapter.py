@@ -30,6 +30,7 @@ def save(fileForm, chapterForm, request):
             for name in zip.namelist():
                 data = zip.read(name)
                 from PIL import Image
+                counter = counter+1 
                 tempPage = Page(chapter = saved_chapter, page_number=counter)
                 tempPage.image.save(name, ContentFile(BytesIO(data).getvalue()), save =False)
                 tempPage.save()
