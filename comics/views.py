@@ -127,8 +127,10 @@ def chapter_create_view(request, pk):
 		form = ChapterCreateForm(request.POST or None)		
 
 		saved_chapter = saveChapter.save(fileForm = file_form, chapterForm = form, request = request)
-		
-		sendNotif.send(saved_chapter)
+		try:
+			sendNotif.send(saved_chapter)
+		except:
+			pass
 		return redirect("chapter-view",saved_chapter.pk)
 			
 	else:

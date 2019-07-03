@@ -21,7 +21,7 @@ class Comic(models.Model):
 	artist			= models.CharField(max_length = 120)
 	description		= models.TextField()
 	tags			= models.ManyToManyField(Tag, verbose_name="Tags")
-	cover 			= models.ImageField(upload_to="")
+	cover 			= models.ImageField(upload_to="covers/")
 	status			= models.PositiveSmallIntegerField(default = True)				 # 1 = Working,		2 = on Hold,	0 = Dropped , hidden = 4
 	views_cnt		= models.PositiveIntegerField(default = 0)
 
@@ -67,7 +67,7 @@ class Chapter(models.Model):
 class Page(models.Model):
 
 	chapter			= models.ForeignKey(Chapter, on_delete= models.CASCADE)
-	image 			= models.ImageField(upload_to ="" )
+	image 			= models.ImageField(upload_to = "pages/")
 	page_number		= models.PositiveIntegerField()
 	updated_at		= models.DateTimeField(auto_now_add=True)
 
@@ -79,7 +79,7 @@ class Page(models.Model):
 
 class Slide(models.Model):
 	comic = models.ForeignKey("Comic", on_delete=models.CASCADE, null = True, blank =True)
-	image = models.ImageField(upload_to="")
+	image = models.ImageField(upload_to="Slides/")
 	title = models.CharField(blank = True, null =True , max_length=100)
 	description = models.TextField(null = True, blank =True)
 	link = models.URLField("Hyperlink", max_length=200, blank =True , null =True)

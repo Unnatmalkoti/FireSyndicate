@@ -23,19 +23,27 @@ def save(fileForm, chapterForm, request):
         # finally:
 
     if fileForm.is_valid() and chapterForm.is_valid():
-        try :
-            zip = zipfile.ZipFile(request.FILES['zip'])
-            saved_chapter= chapterForm.save()
-            counter = 1
-            for name in zip.namelist():
-                data = zip.read(name)
-                from PIL import Image
-                counter = counter+1 
-                tempPage = Page(chapter = saved_chapter, page_number=counter)
-                tempPage.image.save(name, ContentFile(BytesIO(data).getvalue()), save =False)
-                tempPage.save()
-            return saved_chapter
-        except:
-            return False 
+        # try :
+        zip = zipfile.ZipFile(request.FILES['zip'])
+        saved_chapter= chapterForm.save()
+        counter = 1
+        from natsort import humansorted
+        namelist = humansorted(zip.namelist())
+
+        for name in namelist:
+            data = zip.read(name)
+            from PIL import Image
+            counter = counter+1 
+            tempPage = Page(chapter = saved_chapter, page_number=counter)
+            tempPage.image.save(name.split("/")[-1], ContentFile(BytesIO(data).getvalue()), save =False)
+            tempPage.save()
+        return saved_chapter
+        # except:
+        #     return Fase l
+
+
+def FileSortingFunction(a):
+    a = a.split('.')[0].split('/')[-1]
+
         
          
