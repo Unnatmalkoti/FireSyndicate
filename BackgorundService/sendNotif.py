@@ -1,7 +1,7 @@
 from discord_webhook import DiscordWebhook, DiscordEmbed
 def send(chapter):
  
-    webhook = DiscordWebhook(content="<@&595718631984332811>")
+    webhook = DiscordWebhook(content="<@&595718631984332811>", url='https://discordapp.com/api/webhooks/595905581181698048/qfdi8ZyuuvokzcXThH4JC7iO6_0q4dEhU5MXaM2Yfl56nGiRYOYC66QukxB7gCykhEF6')
     webhook.execute()
 
     domainName = "firesyndicate.tk"
