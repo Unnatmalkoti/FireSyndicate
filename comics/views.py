@@ -11,12 +11,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (CreateView, DetailView, ListView, UpdateView, DeleteView)
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-from .forms import ChapterCreateForm, ChapterImagesForm, ComicCreateForm
+from .forms import ChapterCreateForm, ChapterImagesForm, ComicCreateForm, ChapterZipForm
 from .models import Chapter,Comic,Page, Slide
 
+from BackgorundService import sendNotif
+from helperFunctions import saveChapter
+
+
 def home_view(request):
-
-
+	
 	SearchQuery= request.GET.get("query")
 	if SearchQuery:
 		SearchQuerySet = Comic.objects.filter(title__icontains= SearchQuery)
@@ -116,29 +119,31 @@ def chapter_view(request, pk):
 def chapter_create_view(request, pk):
 	if request.user.is_authenticated is not True:
 		raise Http404
+
 	current_comic = get_object_or_404(Comic, pk = pk)
 	if (request.POST):
-		file_form = ChapterImagesForm(request.POST or None, request.FILES or None, images= request.FILES.getlist("images") or None)
+		#file_form = ChapterZipForm(request.POST or None, request.FILES or None, images= request.FILES.getlist("images") or None)
+		file_form = ChapterZipForm(request.POST or None, request.FILES or None)
 		form = ChapterCreateForm(request.POST or None)
-		form.comic = current_comic
 		
-		image_files = request.FILES.getlist("images")
+		#image_files = request.FILES.getlist("images")
+		saveChapter.save(fileForm = file_form, chapterForm = form, request = request)
+		# if form.is_valid() and file_form.is_valid():
 
+		# 	saved_chapter = form.save()
+		# 	countr = 1
+		# 	for file in image_files:
+		# 		temp_page = Page(image=file, chapter = saved_chapter, page_number= countr)
+		# 		countr = countr + 1
+		# 		temp_page.save()
 
-		if form.is_valid() and file_form.is_valid():
-			saved_chapter = form.save()
-
+		# 	sendNotif.send(saved_chapter)
+		# 	return redirect("chapter-view",saved_chapter.pk)
 			
-			countr = 1
-			for file in image_files:
-				temp_page = Page(image=file, chapter = saved_chapter, page_number= countr)
-				countr = countr + 1
-				temp_page.save()
-			return redirect("chapter-view",saved_chapter.pk)
-			#return HttpResponseRedirect(saved_chapter.get_absolute_url) 	
 	else:
 		form = ChapterCreateForm(initial={'comic': current_comic})
-		file_form = ChapterImagesForm()
+		#file_form = ChapterImagesForm()
+		file_form = ChapterZipForm()
 
 	
 	context = {

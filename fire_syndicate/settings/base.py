@@ -160,3 +160,7 @@ if False:
 else:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#Background Tasks
+BACKGROUND_TASK_RUN_ASYNC = True
+MAX_ATTEMPTS = 5
