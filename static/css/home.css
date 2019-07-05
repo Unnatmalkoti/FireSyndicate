@@ -15,9 +15,12 @@
 
 div .tile
 {
+	overflow: hidden;
 	/*border: 1px solid;*/
+	position: relative;
 	display: inline-block;
 	text-align: center;
+	background: #1d1d1d;	
 	margin: 20px;
 	padding-bottom: 0px;
 	box-shadow: 1px 1px 10px #e6eeef;
@@ -29,22 +32,63 @@ div .tile
 	box-shadow: 0px 0px 8px #ff6d0d54;
 }
 
+
 .tile img
 {
+	transition: opacity 200ms ease-in-out;
 	display: block;
 	width: 200px;
 	object-fit: cover;
 	height: 280px;
 }
 
-#tile-title
+.tile-overlay
 {
+	text-align: left;
+	color: white;
+	left: 20px;
+	bottom: 20px;
+	position: absolute;
 	font-size: 13px;
 	margin: 7px 3px;
 	display: inline-block; 
 	font-family: "raleway";
 	font-weight: 300;
 }
+
+.tile-title
+{
+	color: #ff6d0d;
+	cursor: pointer;
+    font-weight: bold;
+    font-size: 34px;
+	padding-bottom: 11px;
+	transition: transform 200ms ease-in-out 50ms;
+	transform: translateX(calc(-100% - 30px))
+}
+.tile-ch-line{
+	transition: transform 200ms ease-in-out 50ms;
+	transform: translateX(calc(-100% - 30px))
+
+}
+
+/* WERID WAYS OF ANIMATION */
+
+.tile:hover > div .tile-title ,.tile:active > div .tile-title
+{
+	transform: translateX(0%);
+}
+.tile:hover > div .tile-ch-line
+{
+	transform: translateX(0%);
+}
+
+.tile:hover > a .comic-cover
+{
+	opacity: 0.4;
+}
+
+/* SLIDER STUFF */
 
 .slider-container
 {
@@ -131,12 +175,12 @@ div .tile
 	justify-content: center;
 	flex-direction:column ;
 	align-items: center;
-z-index: 100;
-position: absolute;
-height: 100%;
-width: 100px;
-opacity: 0.1;
-transition: opacity 150ms ease-in;
+	z-index: 100;
+	position: absolute;
+	height: 100%;
+	width: 100px;
+	opacity: 0.1;
+	transition: opacity 150ms ease-in;
 }
 .arrow:hover
 {

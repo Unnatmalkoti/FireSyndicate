@@ -4,15 +4,19 @@
 {%block head%}
 <link rel="stylesheet" href="{% static "css/home.css"%}">
 <meta name="active-link" value="home-link">
-
+{%if request.GET.query%}
+	<title>Search - {{request.GET.query}}| Fire Syndicate</title>
+{%else%}
+	<title>Fire Syndicate | Read Manga And Stuff</title>
+{%endif%}
 {%endblock head%}
 
 {%block slider%}
 {%if Slides|length%}
 
 	<div class="slider-container">
-		<div class="arrow left" id="left-arrow"><img src="{%static 'assets/left-arrow-slider.svg' %}"></div>
-		<div class="arrow right" id="right-arrow"><img src="{%static 'assets/right-arrow-slider.svg' %}"></div>
+		<div class="arrow left" id="left-arrow"><img src="{%static 'assets/left-arrow-slider.svg' %}" alt="left arrow"></div>
+		<div class="arrow right" id="right-arrow"><img src="{%static 'assets/right-arrow-slider.svg' %}" alt="right arrow"></div>
 		<div class="slider-content">
 		{%for Slide in Slides%}
 			<div class="slide" {%if Slide.comic.getLatestChapter%} onclick="goto('{%url "chapter-view" Slide.comic.getLatestChapter.pk %}')" {%endif%}  order="{{Slide.orderNumber}}">
@@ -26,7 +30,7 @@
 					</div>
 				</div>
 
-					<img class="slide-image" src ={{Slide.image.url}} />
+					<img class="slide-image" src ={{Slide.image.url}} alt="Slide image {{slide.order}}"/>
 
 
 			</div>
@@ -47,17 +51,17 @@
 			<div class ="tile-wrapper">
 				{%if SearchQuerySet%}
 				{%for comic in SearchQuerySet%}
-				<a href="{% url "comic-detail" comic.pk%}">
-					<div class="tile"> 
-						{%if comic.cover%}
-
-						<img src="{{comic.cover.url}}" class="comic-cover" height='300'>
-						{%endif%}
-						<div id="tile-title">
-						<a  href="{% url "comic-detail" comic.pk%}">{{comic.title}}</a>
+				
+				<div class="tile"> 
+					{%if comic.cover%}
+					<a href="{% url "comic-detail" comic.pk%}">
+					<img src="{{comic.cover.url}}" class="comic-cover" alt="{{comic.title}} cover"></a>
+					{%endif%}
+					<div class="tile-overlay">
+						<p onclick="goto('{% url 'comic-detail' comic.pk %}')" class="tile-title">{{comic.title|capfirst}}</p>
 					</div>
-					</div>
-				</a>
+				</div>
+				
 				{%endfor%}
 				{%else%}
 				<h3>No results found.</h3>
@@ -73,23 +77,24 @@
 <div class="section">
 	<div class ="section-heading">Latest</div>
 	<div class ="tile-wrapper">
-			{% for chapter in LatestChapters %}
-		<a href="{% url "chapter-view" chapter.pk%}">
-			<div class="tile"> 
-		
-				{%if chapter.comic.cover%}
+		{% for chapter in LatestChapters %}
+	
+		<div class="tile"> 
+	
+			{%if chapter.comic.cover%}
+			<a href="{% url "chapter-view" chapter.pk%}">
+			<img src="{{chapter.comic.cover.url}}" class="comic-cover" height='300' alt="{{comic.title}} cover"></a>
+			{%endif%}
 
-				<img src="{{chapter.comic.cover.url}}" class="comic-cover" height='300'>
-				{%endif%}
-
-					<div id="tile-title">
-					<a href="{% url "comic-detail" chapter.comic.pk %}">{{chapter.comic.title}}</a> | <a href="{% url "chapter-view" chapter.pk%}"> Chapter {{chapter.number |floatformat}}</span></a>
-				</div> 				
-			</div>
-			{% endfor %}
-			
+				<div class="tile-overlay">
+				<p onclick="goto('{% url 'comic-detail' chapter.comic.pk %}')" class="tile-title">{{chapter.comic.title|capfirst}}</p>
+				<p onclick="goto('{% url 'chapter-view' chapter.pk%}')" class="tile-ch-line">Chapter {{chapter.number |floatformat}}</p>
+			</div> 				
 		</div>
-	</a>
+		{% endfor %}
+		
+	</div>
+	
 
 </div>
 
@@ -98,17 +103,17 @@
 	<div class="tile-wrapper">
 
 		{% for comic in PopularComics %}			
-		<a href="{% url "comic-detail" comic.pk%}">
+		
 			<div class="tile"> 
 				{%if comic.cover%}
-
-				<img src="{{comic.cover.url}}" class="comic-cover" height='300'>
+				<a href="{% url "comic-detail" comic.pk%}">
+				<img src="{{comic.cover.url}}" class="comic-cover" height='300'alt="{{comic.title}} cover"></a>
 				{%endif%}
-				<div id="tile-title">
-				<a  href="{% url "comic-detail" comic.pk%}">{{comic.title}}</a>
+				<div class="tile-overlay">
+				<p onclick="goto('{% url 'comic-detail' comic.pk %}')" class="tile-title">{{comic.title|capfirst}}</p>
 			</div>
 			</div>
-		</a>
+		
 		{% endfor %}
 	<div>
 </div>

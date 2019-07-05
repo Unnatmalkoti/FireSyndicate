@@ -27,8 +27,8 @@ def save(fileForm, chapterForm, request):
         zip = zipfile.ZipFile(request.FILES['zip'])
         saved_chapter= chapterForm.save()
         counter = 1
-        from natsort import humansorted
-        namelist = humansorted(zip.namelist())
+        from natsort import humansorted , natsorted
+        namelist = natsorted(zip.namelist())
 
         for name in namelist:
             data = zip.read(name)
@@ -38,12 +38,8 @@ def save(fileForm, chapterForm, request):
             tempPage.image.save(name.split("/")[-1], ContentFile(BytesIO(data).getvalue()), save =False)
             tempPage.save()
         return saved_chapter
-        # except:
-        #     return Fase l
 
 
-def FileSortingFunction(a):
-    a = a.split('.')[0].split('/')[-1]
 
         
          

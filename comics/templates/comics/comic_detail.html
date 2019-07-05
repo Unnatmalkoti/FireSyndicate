@@ -5,6 +5,7 @@
 {%block head%}
 	<link rel="stylesheet" href="{% static "css/comic-detail.css"%}">
 	<meta name="active-link" value="series-link">
+	<title>{{object_data.title}} | Fire Syndicate</title>
 {%endblock head%}
 
 {% block content %}
@@ -12,11 +13,10 @@
 <h2>{{object_data.title}}</h2>
 
 <div class= "comic-desc-div">
-	<div class="comic-cover">
+	
 	{%if object_data.cover%}
-	<img src= "{{object_data.cover.url}}" height="400" />
+	<img src= "{{object_data.cover.url}}" class="comic-cover" alt="{{comic.title}} cover"/>
 	{%endif%}
-	</div>
 	<div class="comic-desc">
 		<p><strong>Author : </strong>{{object_data.author}}</p>
 		<p><strong>Artist : </strong>{{object_data.artist}}</p>

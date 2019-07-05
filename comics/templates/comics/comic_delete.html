@@ -1,4 +1,7 @@
 {%extends 'layout.html'%}
+{%block head%}
+<title>Delete Chapter | Fire Syndicate</title>
+{%endblock head%}
 {%block content%}
 <form method="POST">{%csrf_token%}
 	<h1> You sure buddy? You wanna delete {{object.title}}</h1>

@@ -6,6 +6,7 @@
 <title>Add a Comic</title>
 <link rel="stylesheet" href="{%static 'css/forms/create-form.css'%}">
 <meta name="active-link" value="series-link">
+<title>Comic Create | Fire Syndicate</title>
 {%endblock head%}
 
 {%block content%}
@@ -16,7 +17,7 @@
 		<div class="flex">
 			<div class="comic-cover">
 				<div class="icon-tray">
-				<img src="{%static 'assets/add-symbol-circle.svg'%}">
+				<img src="{%static 'assets/add-symbol-circle.svg'%}" alt="Plus icon">
 				<span>Add a cover</span>
 				</div>
 				{{form.cover.errors}}

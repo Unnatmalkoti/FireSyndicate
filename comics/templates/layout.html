@@ -7,11 +7,23 @@
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="This is what happens when people smoking weed starts scanlating. You get to read buch of manga with wacky stuff.">
         <title>Fire Syndicate</title>
         <link rel="stylesheet" href="{% static "css/layout.css"%}">
         <link rel="author" href="humans.txt">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Raleway:400" rel="stylesheet">
         <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
+        
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143288270-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-143288270-1');
+        </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
 
         {%block head%}
 
@@ -38,8 +50,8 @@
                 
                     <form class="search" method="GET" action="/">
                         <input type="text" placeholder="Search" class = "search-bar" name="query" value="{{request.GET.query}}">
-                        <img src="{%static 'assets/search-symbol.svg'%}" class="search-icon icon">
-                        <img src="{%static 'assets/accounts-symbol.svg'%}" class="accounts-icon icon">
+                        <img src="{%static 'assets/search-symbol.svg'%}" class="search-icon icon" alt="search icon">
+                        <img src="{%static 'assets/accounts-symbol.svg'%}" class="accounts-icon icon" alt="Account icon">
                         <ul class="drop-down" >
                             {%if user.is_authenticated%}
                             <Span>Hi, {{user.username|capfirst}}</span>
