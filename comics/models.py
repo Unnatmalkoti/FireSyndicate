@@ -16,14 +16,19 @@ class Tag(models.Model):
 		return "{title}".format(title = self.name)
 
 class Comic(models.Model):
-	title 			= models.CharField(max_length = 120)
-	author			= models.CharField(max_length = 120)
-	artist			= models.CharField(max_length = 120)
-	description		= models.TextField()
-	tags			= models.ManyToManyField(Tag, verbose_name="Tags")
-	cover 			= models.ImageField(upload_to="covers/")
-	status			= models.PositiveSmallIntegerField(default = True)				 # 1 = Working,		2 = on Hold,	0 = Dropped , hidden = 4
-	views_cnt		= models.PositiveIntegerField(default = 0)
+
+	display_choices= [("M","Manga Style",), ("W","Webtoon Style")]
+	status_choices = [("W","Working"), ( "H", "On Hold"), ("D", "Dropped"),("I", "Inactive")]
+
+	title 					= models.CharField(max_length = 120)
+	author					= models.CharField(max_length = 120)
+	artist					= models.CharField(max_length = 120)
+	description				= models.TextField()
+	default_display_style	= models.CharField(choices=display_choices, default="W", max_length=1)
+	tags					= models.ManyToManyField(Tag, verbose_name="Tags", blank=True)
+	cover 					= models.ImageField(upload_to="covers/")
+	status					= models.CharField(choices=status_choices, default="W",max_length=1)				
+	views_cnt				= models.PositiveIntegerField(default = 0)
 
 	def __str__(self):
 		return "{title}".format(title = self.title)

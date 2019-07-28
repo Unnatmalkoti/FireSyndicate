@@ -4,6 +4,7 @@
 {%block head%}
 <link rel="stylesheet" href="{% static "css/home.css"%}">
 <meta name="active-link" value="home-link">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 {%if request.GET.query%}
 	<title>Search - {{request.GET.query}}| Fire Syndicate</title>
 {%else%}
@@ -15,8 +16,8 @@
 {%if Slides|length%}
 
 	<div class="slider-container">
-		<div class="arrow left" id="left-arrow"><img src="{%static 'assets/left-arrow-slider.svg' %}" alt="left arrow"></div>
-		<div class="arrow right" id="right-arrow"><img src="{%static 'assets/right-arrow-slider.svg' %}" alt="right arrow"></div>
+		<div class="arrow-slider left" id="slider-left-arrow"><img src="{%static 'assets/left-arrow-slider.svg' %}" alt="left arrow"></div>
+		<div class="arrow-slider right" id="slider-right-arrow"><img src="{%static 'assets/right-arrow-slider.svg' %}" alt="right arrow"></div>
 		<div class="slider-content">
 		{%for Slide in Slides%}
 			<div class="slide" {%if Slide.comic.getLatestChapter%} onclick="goto('{%url "chapter-view" Slide.comic.getLatestChapter.pk %}')" {%endif%}  order="{{Slide.orderNumber}}">
@@ -35,7 +36,7 @@
 
 			</div>
 		{%endfor%}
-		
+			
 		</div>
 	</div>
 {%endif%}
@@ -44,35 +45,29 @@
 
 
 {%block content%}
-{%if request.GET.query%}
-
-		<div class="section">
-			<div class ="section-heading">Search Results ({{SearchQuerySet|length}})</div>
-			<div class ="tile-wrapper">
-				{%if SearchQuerySet%}
-				{%for comic in SearchQuerySet%}
-				
-				<div class="tile"> 
-					{%if comic.cover%}
-					<a href="{% url "comic-detail" comic.pk%}">
-					<img src="{{comic.cover.url}}" class="comic-cover" alt="{{comic.title}} cover"></a>
-					{%endif%}
-					<div class="tile-overlay">
-						<p onclick="goto('{% url 'comic-detail' comic.pk %}')" class="tile-title">{{comic.title|capfirst}}</p>
-					</div>
-				</div>
-				
-				{%endfor%}
-				{%else%}
-				<h3>No results found.</h3>
-				{%endif%}
-
+{%if Posts%}
+<div class="section">
+<div class="section-heading">Blog Stuff</div>
+<div class="arrow-blog" id ="blog-left-arrow"><img src="{%static 'assets/left-arrow-2.svg'%}"></div>
+	<div class="post-container">
+	
+	<div class="post-content">
+	{%for post in Posts%}
+		<div class="post-tile" onclick="goto('{%url 'post-detail' post.pk%}')">
+			<h2>{{post.title|capfirst}}</h2>
+			<span class="post-type">{{post.get_post_type_display}}</span>
+			<div class="post-body">
+			{{post.body|safe|truncatechars_html:100}}
 			</div>
+			<span class="timestamp">{{post.created_at|timesince}} ago</span>
 		</div>
-{% else %}
-
-
-
+	{%endfor%}
+	<div class="post-tile" onclick="goto('{%url 'blog-list'%}')"><h1>More</h1></div>
+	</div>
+	</div>
+	<div class="arrow-blog right" id="blog-right-arrow"><img src="{%static 'assets/right-arrow-2.svg'%}"></div>
+</div>
+{%endif%}
 
 <div class="section">
 	<div class ="section-heading">Latest</div>
@@ -98,6 +93,14 @@
 
 </div>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4422796611007720",
+    enable_page_level_ads: true
+  });
+</script>
+
 <div class="section">
 	<div class ="section-heading">Popular</div>
 	<div class="tile-wrapper">
@@ -117,6 +120,5 @@
 		{% endfor %}
 	<div>
 </div>
-{%endif%}
 <script src="{%static 'js/home.js'%}"> </script>
 {%endblock%}

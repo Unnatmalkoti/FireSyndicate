@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     'blog',
     'ckeditor',
     'storages',
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'fire_syndicate.urls'
@@ -88,15 +90,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': "sitedb",
-#         'HOST' :"mongodb+srv://unnat:nonstop98@firesyndicate-9aarz.mongodb.net/test?retryWrites=true",
-#         'USER' : "unnat",
-#         'PASSWORD' : "nonstop98"
-#     }
-# }
 
 
 # Password validation

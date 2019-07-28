@@ -1,0 +1,27 @@
+{%extends 'layout.html' %}
+{% load static %}
+{%block head%}
+<meta name="active-link" value="blog-link">
+<link rel="stylesheet" href="{% static "css/blog/blog-list.css"%}">
+{%endblock head%}
+{%block content%}
+    {%for post in object_list%}
+    <div class="post-div"  onclick="goto('{%url 'post-detail' post.pk%}')">
+        <div class="title-column">
+            <span class="post-type">{{post.get_post_type_display}}</span>
+            <h1>{{post.title| capfirst}}</h1>
+            <span class="timestamp">{{post.created_at}}</span>
+        </div>
+    
+    <div class="post-body">
+    {{post.body|safe|truncatechars_html:200}}
+    </div>
+    <div class="cover-div">
+        {%if post.cover%}
+        <img src="{{post.cover.url}}">
+        {%endif%}
+    </div>
+    
+    </div>
+    {% endfor %}
+{%endblock content%}

@@ -1,5 +1,5 @@
 .content-image{
-		width :100%;
+	width :100%;
 	max-width: 900px;
 	min-width: 400px;
 }
@@ -29,8 +29,42 @@
 }
 .prev-next
 {
-	padding: 0px 10px;
-	margin:30px 0;
+	height: 40px;
+	margin: 10px;
+	position: relative;
+}
+
+.btn
+{
+	position: absolute;
+	display: inline-block;
+    padding: 9px;
+    width: 40px;
+	height: 40px;
+	text-align: center;
+    background: #ffffff;
+    border: 2px #ff6d0dbd solid;
+}
+
+.right
+{
+	right:0;
+}
+
+.left
+{
+	left:0px;
+}
+
+.btn img
+{
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.indented-btn
+{
+	margin: 0px 50px;
 }
 
 @media(max-width:600px)

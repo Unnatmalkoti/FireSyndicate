@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{%load static%}
+
+{%block head%}
+<link rel="stylesheet" href="{% static "css/manga-viewer.css"%}">
+<meta name="active-link" value="series-link">
+<title>{{object_data.comic.title }} - {{object_data.number |floatformat}}| Fire Syndicate</title>
+{%endblock head%}
+
+{% block content %}
+
+
+<div class="title-row">
+    <a href="{%url "comic-detail" object_data.comic.pk%}"><span class="comic-title"><strong>{{object_data.comic.title|capfirst }}</strong></span></a>
+    <span class="chapter-title">Chapter {{object_data.number |floatformat}} - {{object_data.name}}</span>
+</div>
+
+
+<div class="prev-next">{%if prevCh%}<a class ="btn left" href="{%url 'chapter-view' prevCh.pk %}"><img src="{%static 'assets/left-arrow-2-primary.svg'%}"></a>{% endif %}
+<a class ="btn left indented-btn" id="prevPageBtn"><img src="{%static 'assets/left-arrow-slider-primary.svg'%}"></a>
+<div class="page-number" id="pageNumber">Page 1</div>
+<a class ="btn right indented-btn" id="nextPageBtn"><img src="{%static 'assets/right-arrow-slider-primary.svg'%}"></a>
+{%if nextCh%}<a class ="btn right" href="{%url 'chapter-view' nextCh.pk %}"><img src="{%static 'assets/right-arrow-2-primary.svg'%}"></a>{% endif %}</div>
+
+
+<div class="image-wrapper">
+    <div class="touch-nav">
+        <div class="left-touch-nav" id="prevPageBtn"></div>
+        <div class="right-touch-nav" id="nextPageBtn"></div>
+    </div>
+
+    {% for page in queryset %}
+        <img src='{{ page.image.url}}' class ="content-image {%if forloop.first%}active-image{%endif%}" alt="Page {{page.number}}"/>
+    {% endfor %}
+</div>
+
+<div class="prev-next">{%if prevCh%}<a class ="btn left" href="{%url 'chapter-view' prevCh.pk %}"><img src="{%static 'assets/left-arrow-2-primary.svg'%}"></a>{% endif %}
+<a class ="btn left indented-btn" id="prevPageBtn"><img src="{%static 'assets/left-arrow-slider-primary.svg'%}"></a>
+
+<a class ="btn right indented-btn" id="nextPageBtn"><img src="{%static 'assets/right-arrow-slider-primary.svg'%}"></a>
+{%if nextCh%}<a class ="btn right" href="{%url 'chapter-view' nextCh.pk %}"><img src="{%static 'assets/right-arrow-2-primary.svg'%}"></a>{% endif %}</div>
+
+
+<script src="{%static 'js/manga-viewer.js'%}"></script>
+{% endblock content %}

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView,LoginView
 from comics.views import home_view
+from django.views.generic import TemplateView
 
 
 from django.conf import settings
@@ -24,13 +25,14 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('',home_view,name='home'),
+    path('',home_view, name='home'),
     path('admin/', admin.site.urls),
     path('comics/', include('comics.urls')),
+    path('blog/', include('blog.urls')),
     path('login/',LoginView.as_view(
                                 template_name='comics/login.html',
                                 ),name='login'),
-    path('logout/',LogoutView.as_view(),name='logout')
+    path('logout/',LogoutView.as_view(),name='logout'),
 
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

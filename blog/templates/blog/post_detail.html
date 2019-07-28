@@ -1,0 +1,31 @@
+{%extends 'layout.html' %}
+{% load static %}
+{%block head%}
+<meta name="active-link" value="blog-link">
+<link rel="stylesheet" href="{% static "css/blog/post-detail.css"%}">
+{%endblock head%}
+
+{%block slider%}
+
+{%endblock slider%}
+
+{%block content%}
+    <div class="cover-div shadow">
+        {%if post.cover%}
+        <img src="{{post.cover.url}}">
+        {%endif%}
+    </div>
+
+<div class="post-div shadow">
+        <div class="title-column">
+            <span class="post-type">{{post.get_post_type_display}}</span><span class="status-span">Active</span>
+            <h1>{{post.title| capfirst}}</h1>
+            <span class="timestamp">{{post.created_at}}</span>
+        </div>
+    
+    <div class="post-body">
+    {{post.body|safe}}
+    </div>    
+</div>
+
+{%endblock content%}

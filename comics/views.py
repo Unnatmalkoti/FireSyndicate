@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .forms import ChapterCreateForm, ChapterImagesForm, ComicCreateForm, ChapterZipForm
 from .models import Chapter,Comic,Page, Slide
+from blog.models import Post
 
 from BackgorundService import sendNotif
 from helperFunctions import saveChapter
@@ -26,14 +27,18 @@ def home_view(request):
 		context = {
 			"SearchQuerySet": SearchQuerySet
 		}
+		return render(request, 'comics/search_result.html',context)
 	else:
+		qs4 = Post.objects.order_by("-created_at")
 		qs3 = Slide.objects.order_by("orderNumber")
 		qs = Chapter.objects.order_by("-created_at")[0:5]
 		qs2 = Comic.objects.order_by("-views_cnt")[0:10]
 		context = {
+			
 			"LatestChapters" : qs,
 			"PopularComics" : qs2,
 			"Slides":qs3,
+			"Posts": qs4,
 		}
 
 	return render(request, 'comics/home.html',context)
@@ -67,7 +72,7 @@ class ComicCreateView(LoginRequiredMixin,CreateView):
 	template_name = "comics/comic_create.html"
 
 #Comic Update View
-class ComicUpdateView(LoginRequiredMixin,CreateView):
+class ComicUpdateView(LoginRequiredMixin,UpdateView):
 	template_name = "comics/comic_create.html"
 	form_class = ComicCreateForm
 	model = Comic
@@ -111,7 +116,10 @@ def chapter_view(request, pk):
 	'nextCh'	: prevNext['nextCh'],
 	}
 	print (queryset)
-	return render(request, 'comics/comic_viewer.html', context)
+	if current_comic.default_display_style == "W":
+		return render(request, 'comics/Webtoon_Viewer.html', context)
+	else:
+		return render(request, 'comics/Manga_Viewer.html', context)
 
 
 

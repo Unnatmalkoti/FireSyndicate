@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{%load static%}
+
+{%block head%}
+<link rel="stylesheet" href="{% static "css/home.css"%}">
+	<title>Search - {{request.GET.query}}| Fire Syndicate</title>
+{%endblock head%}
+
+{%block content%}
+		<div class="section">
+			<div class ="section-heading">Search Results ({{SearchQuerySet|length}})</div>
+			<div class ="tile-wrapper">
+				{%if SearchQuerySet%}
+				{%for comic in SearchQuerySet%}
+				
+				<div class="tile"> 
+					{%if comic.cover%}
+					<a href="{% url "comic-detail" comic.pk%}">
+					<img src="{{comic.cover.url}}" class="comic-cover" alt="{{comic.title}} cover"></a>
+					{%endif%}
+					<div class="tile-overlay">
+						<p onclick="goto('{% url 'comic-detail' comic.pk %}')" class="tile-title">{{comic.title|capfirst}}</p>
+					</div>
+				</div>
+				
+				{%endfor%}
+				{%else%}
+				<h3>No results found.</h3>
+				{%endif%}
+
+			</div>
+		</div>
+{%endblock content%}
