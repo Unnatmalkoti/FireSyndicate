@@ -43,6 +43,17 @@
 					<td><label for="status">Status: </label></td>
 					<td>{%render_field form.status placeholder="Status" id="status"%}{{form.status.errors}}</td>
 				</tr>
+
+				<tr class="secondary-fields">
+					<td><label for="type">Series Type: </label></td>
+					<td>{%render_field form.default_display_style id="type"%}{{form.default_display_style.errors}}</td>
+				</tr>
+
+				<tr class="secondary-fields">
+					<td><label for="tags">Tags: </label></td>
+					<td>{%render_field form.tag id="tags"%}{{form.tags.errors}}</td>
+				</tr>
+
 				<tr class="secondary-fields">
 					<td><label for="desc">Description: </label></td>
 					<td>{%render_field form.description id="desc" class="desc" placeholder="Description"%}{{form.description.errors}}</td>

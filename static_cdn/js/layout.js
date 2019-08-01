@@ -35,14 +35,29 @@ const activelink = ()=>
         var active_tab =document.getElementById(activeLinkId);
         active_tab.classList.add("active-li");
         var nav_ul = document.getElementsByTagName("nav")[0].firstElementChild;
-        nav_ul.addEventListener("mouseover", ()=>active_tab.classList.remove("active-li"));
-        nav_ul.addEventListener("mouseout", ()=>active_tab.classList.add("active-li"));
+        var BackgroundLi = document.querySelector("#background-li");
+
+
+        // nav_ul.addEventListener("mouseover", ()=>active_tab.classList.remove("active-li"));
+        // nav_ul.addEventListener("mouseout", ()=>active_tab.classList.add("active-li"));
     }
     catch(e)
     {
         console.log(e);
     }
 }
+
+const navTo = (link, position)=>
+{
+    var BackgroundLi = document.querySelector("#background-li");
+    // BackgroundLi.style.transition="transform "+ 100*position+"ms ease-out"
+    // BackgroundLi.style.transform = "translateX("+ (position-1)*120+"px)" 
+    
+        window.location= link;
+    
+    
+}
+
 
 const goto = (link)=>
 {

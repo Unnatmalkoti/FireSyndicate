@@ -13,7 +13,7 @@
 
 <div class="title-row">
 <a href="{%url "comic-detail" object_data.comic.pk%}"><span class="comic-title"><strong>{{object_data.comic.title|capfirst }}</strong></span></a>
-<span class="chapter-title">Chapter {{object_data.number |floatformat}} - {{object_data.name}}</span>
+<span class="chapter-title">Chapter {{object_data.number |floatformat}} {%if object_data.name is not None%}- {{object_data.name}}{%endif%}</span>
 </div>
 
 

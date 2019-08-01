@@ -1,89 +1,154 @@
-h2{
 
-	margin: 20px  0px;
-	font-size: 25px;
-}
-
-.comic-desc
+.comic-desc-div
 {
-	display: inline-block;
-	margin-left: 20px;
-	line-height: 30px;
-
-
+	margin-top: 100px;
+	display: flex;
 }
+
 
 .comic-cover
 { 	
-	
-	display: inline-block;
 	height: 400px;
 	width: 286px;
 	object-fit: cover;
 
 }
 
-table
+.comic-desc
 {
-	width: 100%;
-	margin-bottom: 100px;
+	margin-left: 30px;
 }
 
-.comic-desc-div
+.comic-desc h1
 {
-	display: flex;
-
+	font-size: 36px;
+	margin-bottom: 15px;
 }
 
-
-
-table td
+.comic-desc p 
 {
-	height: 35px;
-	padding-left: 10px;
-	
-}
-table tr
-{
-	height: 35px;
-
+	line-height: 1.5rem;
+	margin-top: 10px;
 }
 
-table .content:hover 
+.tag-span
 {
-	background: #e5e6e8;
+	padding: 6px;
+    margin: 4px;
+    font-size: 15px;
+    background: #e5e6e8;
+    border-radius: 6px;
 }
 
+/* buttons */
 
-.chapter-container span
+.btn
 {
-	display: inline-flex;
-	margin: 20px;
+    font-size: 14px;
+    padding: 14px 30px;
+    display: inline-block;
+    margin: 10px 0px;
+    margin-right: 10px;
+    background-color: #ccc;
+	transition: all 50ms ease-in-out;
 }
-table thead{
-	background-color: #008ed6;
-	margin-left: 0px;
-	margin-right: 0px;
-	font-weight: bold;
+
+.btn:hover
+{
+	filter: brightness(105%);
+}
+
+.btn:active
+{
+	transform: scale(0.98);
+}
+.primary-btn,
+.primary-btn:visited
+{
 	color: white;
+	background-color: var(--primary-accent-color)
+}
+
+.hr
+{
+	height: 2px;
+    margin: 50px 0px;
+    background-color: #707070;
+    opacity: 0.07;
+}
+/* Chapter stuff */
+
+.chapter-container
+{
+	margin-top: 75px;
+}
+
+.chapter-container h2
+{
+	font-size: 25px;
 }
 
 
-td.delete
-{
-	margin-right: 20px;
 
+.table-header
+{
+	padding: 50px;
+	width: 100%;
+	padding-bottom: 10px;
+	border-spacing: 0px;
 }
 
-@media(max-width:768px)
+.table-header tr
 {
-	.comic-desc-div
-	{
-		flex-wrap: wrap;
-	}
+	box-shadow: 0px 4px 5px -3px #56565663;
+}
+.table-header td
+{
+	background-color: var(--primary-accent-color);
+	color: white;	
+}
 
-	.comic-desc
-	{
-		margin-top: 20px;
-	}
+.content-table
+{
+	border-spacing: 0 6px;
+	padding: 0 50px;
+    width: 100%;
+    margin-top: -10px;
+}
+
+.table-row
+{
+	background-color: #70707015;
+	cursor: pointer;
+}
+
+.table-row:hover
+{
+	background-color: #70707020;
+}
+
+
+td
+{
+	color: #707070;
+	width: 20%;
+	padding: 11px;
+    padding-left: 25px;
+	font-size: 15px;
+}
+
+.views-td,
+.delete-td
+{
+	width: 10%;
+}
+
+td a
+{
+	margin-right: 10px; 
+}
+
+td a:hover
+{
+	filter: brightness(70%);
 }

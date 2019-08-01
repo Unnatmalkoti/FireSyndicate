@@ -3,6 +3,7 @@
 	--primary-accent-color : #FF6D0D;
 	--secondary-bg-color : #292826;
 	--tertiary-bg-color : #5A5957;
+	--secondary-accent-color :#2295e2;
 	font-size:16px;
 }
 
@@ -86,17 +87,29 @@ nav a:link
 }
 nav li
 {
+	z-index: 2;
+	transition: all 100ms ease-out;
 	padding: 10px 40px;
 	font-size: 0.95rem;
 	text-align: center;
 	cursor: pointer;
 }
-
-
 nav li:hover
 {
-	background-color: var(--primary-accent-color);
+	background-color: var(--tertiary-bg-color);
 }
+
+#background-li
+{
+	position: absolute;
+    width: 120px;
+    height: 38px;
+    z-index: 1;
+}
+/* .active-li:hover
+{
+	background-color: var(--primary-accent-color);
+} */
 
 .search
 {

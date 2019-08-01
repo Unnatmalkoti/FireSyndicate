@@ -1,0 +1,74 @@
+.post-div
+{   cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 2px #7070701f solid;
+    transition: 100ms opacity ease-out;
+
+}
+.post-div:hover
+{
+    opacity: 0.7;
+}
+
+.title-column
+{
+    width: 30%;
+}
+
+.post-div :nth-last-child(0)
+{
+    border-style: none;
+
+}
+
+.post-div .timestamp
+{
+    
+    margin: 10px 0px;
+    display: block;
+    color: gray; 
+}
+.post-body
+{
+    width:30%;
+    margin-top: 40px;
+}
+
+.post-type
+{
+
+        margin: 10px 0px;
+        display: inline-block;
+
+        letter-spacing: 1px;
+
+        font-size: 14px;
+
+        padding: 6px 16px;
+        color: #ffffff;
+        background-color: #9c9c9c;
+    
+}
+
+.post-div p
+{
+    line-height: 1px;
+    line-height: 27px;
+    margin: 10px 0px;
+}
+
+.cover-div
+{
+    width: 30%;
+}
+
+.cover-div img
+{
+    min-width: 300px;
+    min-height: 200px;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}

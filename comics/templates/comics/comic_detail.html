@@ -10,48 +10,58 @@
 
 {% block content %}
 
-<h2>{{object_data.title}}</h2>
+
 
 <div class= "comic-desc-div">
 	
 	{%if object_data.cover%}
 	<img src= "{{object_data.cover.url}}" class="comic-cover" alt="{{comic.title}} cover"/>
 	{%endif%}
+	
 	<div class="comic-desc">
+		<h1>{{object_data.title}}</h1>
 		<p><strong>Author : </strong>{{object_data.author}}</p>
 		<p><strong>Artist : </strong>{{object_data.artist}}</p>
+		<p><strong>Tags : </strong>{%for tag in object_data.getAllTags%}<span class="tag-span">{{tag}}</span>{%empty%} No tags, nope not at all. {%endfor%}</p>
 		<p><strong>Description :</strong>{{object_data.description|linebreaks}}</p>
 		<p><strong>Views : </strong>{{object_data.views_cnt}}</p><br>
 		{%if user.is_authenticated%}
-		<p><strong><a href="{% url "chapter-create" object_data.pk%}">Upload a Chapter</a></strong></p>
+		<a class="btn primary-btn" href="{% url "chapter-create" object_data.pk%}">Upload a Chapter</a>
+		<a class="btn" href="{% url "comic-update" object_data.pk%}">Edit Details</a>
 		{%endif%}
 
 	</div>
 </div>
-<br>
+<div class="hr"></div>
 
-<div id="chapter-container">
+<div class="chapter-container">
 	<h2>Chapters</h2>
 
-<table class="chapter">
-<thead>
-	<td>Chapters</td>
-	<td>Views</td>
-	{%if user.is_authenticated%}<td>Action</td>{%endif%}
-</thead>
-{% for chapter in queryset %}
+	<table class="table-header">
+		<td>Chapter ##</td>
+		<td>Chapter Name</td>
+		<td class="views-td">Views</td>
+		{%if user.is_authenticated%}<td class="delete-td">Action</td>{%endif%}
+		<td>Time</td>
+	</table>
 
-	<tr class="content"><div>
-    <td class="chapter-title"><a href="{{chapter.get_absolute_url}}">{{chapter.name}} {{chapter.number}}</a></td>
-	<td class="chapter-view">{{chapter.views_cnt}}</td>
-	{%if user.is_authenticated%}
-	<td class="delete"><a href="{% url "chapter-delete" chapter.pk %}">delete</a></td>
-	{%endif%}
-   	</div>
-    </tr>
-{% endfor %}
-</table>
-</div>
+	<table class="content-table">
+	{% for chapter in queryset %}
+
+		<tr class="table-row" onclick="goto('{{chapter.get_absolute_url}}')">
+		<td class="chapter-title">Chapter {{chapter.number|floatformat}}</a></td>
+		<td>{{chapter.name|default_if_none:""}}</td>
+		<td class="views-td">{{chapter.views_cnt}}</td>
+		{%if user.is_authenticated%}
+		<td class="delete-td"><a href="{% url "chapter-delete" chapter.pk %}">Delete</a><a href=#>Edit</a></td>
+		{%endif%}
+		<td>{{chapter.created_at|date:"SHORT_DATETIME_FORMAT"}}</td>
+		</tr>
+	{%empty%}
+	<tr>No chapter available right now babe.</tr>
+	{% endfor %}
+
+	</table>
 
 
 

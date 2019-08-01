@@ -2,7 +2,18 @@
 	width :100%;
 	max-width: 900px;
 	min-width: 400px;
+	border: 2px #5a59570f solid;
+	border-top-style: none;
+	border-bottom-style: none;
 }
+
+.content-image:nth-child(1){
+	border-top-style: solid;
+}
+.content-image:nth-last-child(1){
+	border-bottom-style: solid;
+}
+
 
 .image-wrapper
 {

@@ -20,14 +20,30 @@
 		<div class="arrow-slider right" id="slider-right-arrow"><img src="{%static 'assets/right-arrow-slider.svg' %}" alt="right arrow"></div>
 		<div class="slider-content">
 		{%for Slide in Slides%}
-			<div class="slide" {%if Slide.comic.getLatestChapter%} onclick="goto('{%url "chapter-view" Slide.comic.getLatestChapter.pk %}')" {%endif%}  order="{{Slide.orderNumber}}">
+			<div class="slide" {%if Slide.comic.getLatestChapter%} onclick="goto('{%url "chapter-view" Slide.comic.getLatestChapter.pk %}')" 
+								{%elif Slide.blog_post.title is not None %} onclick="goto('{%url "post-detail" Slide.blog_post.pk %}')"
+								{%elif slide.link is not None%}	onclick="goto('{{slide.link}}')" {%endif%} 
+			 order="{{Slide.orderNumber}}">
 					<div class="left-div">
 					<div class="slide-content">
+							{%if Slide.comic.title is not None%} {% comment %}           If Comic is there        {% endcomment %}
 							<h1>{{Slide.comic.title}}</h1>
 							<p>{{Slide.comic.description|truncatewords:35}}</p>
-							{%if Slide.comic.getLatestChapter%}
-							<a href= '{%url "chapter-view" Slide.comic.getLatestChapter.pk %}'> Read Chapter {{Slide.comic.getLatestChapter.number|floatformat}} </a>
+								{%if Slide.comic.getLatestChapter%}
+								<a href= '{%url "chapter-view" Slide.comic.getLatestChapter.pk %}'> Read Chapter {{Slide.comic.getLatestChapter.number|floatformat}} </a>
+								{%endif%}
+
+							{% elif Slide.blog_post.title is not None %}	{% comment %}           If Blog post is there        {% endcomment %}
+							<h1>{{Slide.blog_post.title}}</h1>
+							{{Slide.blog_post.body|safe|truncatewords_html:35}}
+							<a href= '{%url "post-detail" Slide.blog_post.pk %}'>Read More </a>
+
+							{%else%}
+							else
+							<h1>{{Slide.title}}</h1>
+							<p>{{Slide.description|truncatewords:35}}</p>
 							{%endif%}
+											
 					</div>
 				</div>
 

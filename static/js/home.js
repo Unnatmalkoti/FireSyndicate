@@ -53,7 +53,7 @@ function blogSlider()
     const leftBtn = document.querySelector("#blog-left-arrow");
     const rightBtn = document.querySelector("#blog-right-arrow");
 
-    let counter =0;
+    let counter = 1;
    
 
     const sliderContent = document.querySelector(".post-content");
@@ -61,23 +61,32 @@ function blogSlider()
 
     rightBtn.addEventListener("click", function()
     {
+        
         sliderContent.style.transition = "transform 0.6s ease-in-out";
-        if(counter >= slides.length -1 )
+        var slideWidth = slides[0].offsetWidth;
+        let multiplier = Math.floor(document.querySelector(".post-content").offsetWidth / 490) || 1;
+        if(counter + multiplier -1 >= slides.length)
             return;
-        let multiplier = Math.floor(document.querySelector(".post-content").offsetWidth / 490)
+        
         counter = counter + multiplier;
-        sliderContent.style.transform = "translateX(-" + 475*counter +"px )";
+        sliderContent.style.transform = "translateX(-" + (slideWidth+40)*(counter-1) +"px )";
+        console.log("counter : " + counter);
+        console.log("multiplier: " + multiplier);
         
     })
 
     leftBtn.addEventListener("click", function()
     {
         sliderContent.style.transition = "transform 0.6s ease-in-out";
-        if(counter <= 0 )
+        if(counter < 1 )
             return;
-        let multiplier = Math.floor(document.querySelector(".post-content").offsetWidth / 490)
+        var slideWidth = slides[0].offsetWidth;
+        let multiplier = Math.floor(document.querySelector(".post-content").offsetWidth / 490) || 1;
         counter = counter - multiplier;
-        sliderContent.style.transform = "translateX(-" + 475*counter +"px )";
+        sliderContent.style.transform = "translateX(-" + (slideWidth+40)*(counter-1) +"px )";
+
+        console.log("counter : " + counter);
+        console.log("multiplier: " + multiplier);
 
     })
 

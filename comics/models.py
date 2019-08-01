@@ -35,6 +35,10 @@ class Comic(models.Model):
 
 	def getLatestChapter(self):
 		return Chapter.objects.filter(comic = self).order_by("-pk").first()
+
+	def getAllTags(self):
+		return Tag.objects.filter(comic = self).order_by("name")
+		
 	def get_absolute_url(self):
 		return reverse("comic-detail", kwargs = {'pk' : self.pk}) 
 
@@ -84,6 +88,8 @@ class Page(models.Model):
 
 class Slide(models.Model):
 	comic = models.ForeignKey("Comic", on_delete=models.CASCADE, null = True, blank =True)
+	blog_post  = models.ForeignKey("blog.Post", on_delete=models.CASCADE,verbose_name="Blog Post", null= True, blank =True)
+
 	image = models.ImageField(upload_to="Slides/")
 	title = models.CharField(blank = True, null =True , max_length=100)
 	description = models.TextField(null = True, blank =True)

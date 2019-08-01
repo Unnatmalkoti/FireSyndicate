@@ -41,11 +41,12 @@
             </div>
             <nav>
                 <ul>
-                    <li id="home-link" onclick="goto('{% url 'home' %}')">Home</li>
-                    <li id="series-link" onclick="goto('{% url "comic-view"%}')">Series</li>
-                    <li id="blog-link" onclick="goto('{% url "blog-list"%}')">Blog</li>
+                    {% comment %} <li id="background-li" class="active-li"></li> {% endcomment %}
+                    <li id="home-link" onclick="navTo('{% url 'home' %}', 1)">Home</li>
+                    <li id="series-link" onclick="navTo('{% url "comic-view"%}', 2)">Series</li>
+                    <li id="blog-link" onclick="navTo('{% url "blog-list"%}', 3)">Blog</li>
                     <li onclick="goto('')">Staff</li>
-                    <li onclick="goto('https://discord.gg/N5QR9PJ')">Discord</li>
+                    <li onclick="navTo('https://discord.gg/N5QR9PJ', 5)">Discord</li>
                 </ul>
                 
                     <form class="search" method="GET" action="/">

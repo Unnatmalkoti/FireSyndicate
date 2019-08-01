@@ -20,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'txw!_rv4wd3ftzbi^kv8k86%)9$ite00%=0(1p9p42xo9wv(b5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -116,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -138,26 +137,8 @@ STATICFILES_DIRS =[os.path.join(BASE_DIR,"static")]
 LOGIN_REDIRECT_URL  = '/'
 LOGOUT_REDIRECT_URL  = '/'
 
-if False:
-    AWS_ACCESS_KEY_ID = 'AKIAZ4MKS6I5N66PF4G3'
-    AWS_SECRET_ACCESS_KEY = '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'
-    AWS_STORAGE_BUCKET_NAME = 'firesyndicate-media'
-    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
-    }
-    AWS_LOCATION = 'static'
-
-    STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-    DEFAULT_FILE_STORAGE = 'fire_syndicate.storage_backends.MediaStorage' 
-    MEDIA_URL = '/media/'
-    AWS_DEFAULT_ACL = None
-
-else:
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #Background Tasks
 BACKGROUND_TASK_RUN_ASYNC = True

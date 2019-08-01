@@ -62,4 +62,4 @@ class ChapterZipForm(forms.Form):
 class ComicCreateForm(forms.ModelForm):
 	class Meta():
 		model = Comic
-		fields= ["title","author","artist", "description", "cover", "status"]
+		fields= ["title","author","artist", "description", "cover", "status", "default_display_style","tags"]
