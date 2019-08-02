@@ -8,9 +8,9 @@ try:
 except:
     pass
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["firesyndicate.tk"]
+ALLOWED_HOSTS = ["firesyndicate.tk","localhost"]
 #CSRF_COOKIE_SECURE = True
 #SESSION_COOKIE_SECURE = True
 STATIC_ROOT = os.path.join( BASE_DIR,"static_cdn")

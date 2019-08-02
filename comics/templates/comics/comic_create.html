@@ -55,6 +55,11 @@
 				</tr>
 
 				<tr class="secondary-fields">
+					<td><label for="role-id">Discord Role Id: </label></td>
+					<td>{%render_field form.discord_role_id id="role-id" placeholder="Role Id"%}{{form.discord_role_id.errors}}</td>
+				</tr>
+
+				<tr class="secondary-fields">
 					<td><label for="desc">Description: </label></td>
 					<td>{%render_field form.description id="desc" class="desc" placeholder="Description"%}{{form.description.errors}}</td>
 				</tr>

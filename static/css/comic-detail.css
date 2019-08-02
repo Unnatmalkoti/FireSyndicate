@@ -8,6 +8,7 @@
 
 .comic-cover
 { 	
+	flex-shrink: 0;
 	height: 400px;
 	width: 286px;
 	object-fit: cover;
@@ -63,7 +64,8 @@
 	transform: scale(0.98);
 }
 .primary-btn,
-.primary-btn:visited
+.primary-btn:visited,
+.primary-btn:link
 {
 	color: white;
 	background-color: var(--primary-accent-color)
@@ -78,6 +80,10 @@
 }
 /* Chapter stuff */
 
+.volume-h4
+{
+	margin: 0px -21px -9px; 
+}
 .chapter-container
 {
 	margin-top: 75px;

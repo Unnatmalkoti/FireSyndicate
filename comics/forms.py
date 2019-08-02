@@ -10,7 +10,9 @@ class ChapterCreateForm(forms.ModelForm):
 
 	class Meta():
 		model = Chapter
-		fields= ["number", "name","comic"]
+		fields= ["number", "name","comic","volume", "discord_message"]
+	
+	discord_message = forms.CharField()
 
 class ChapterImagesForm(forms.Form):
 	def __init__(self, *args, **kwargs):
@@ -20,7 +22,6 @@ class ChapterImagesForm(forms.Form):
 		super(ChapterImagesForm, self).__init__(*args, **kwargs)  # and carry on to init the form
 
 	def clean(self):
-
 		for image in self.images:
 			try:
 				im = Image.open(image)
@@ -53,13 +54,14 @@ class ChapterZipForm(forms.Form):
 					image.verify()
 				except:
 					valid = False
-					raise forms.ValidationError(_("Zip should have only images"))
-			return True
+					self.add_error("zip",forms.ValidationError("Zip should have only images"))
+			return valid
 		except :
-			raise forms.ValidationError(_("Upload valid Zip file"))
+			self.add_error("zip",forms.ValidationError("Upload valid Zip file"))
+			return False
 		
 
 class ComicCreateForm(forms.ModelForm):
 	class Meta():
 		model = Comic
-		fields= ["title","author","artist", "description", "cover", "status", "default_display_style","tags"]
+		fields= ["title","author","artist", "description", "cover", "status", "default_display_style","tags","discord_role_id"]

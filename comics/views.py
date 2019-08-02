@@ -57,9 +57,9 @@ def comic_detail_view(request, pk):
 	current_comic = get_object_or_404(Comic, pk =pk)
 	current_comic.views_cnt += 1
 	current_comic.save()
-	queryset = Chapter.objects.filter(comic = current_comic).order_by("-created_at")
+	queryset = Chapter.objects.filter(comic = current_comic).order_by("-volume", "-number")
 
-	context = {
+	context =	{
 	'object_data'	: current_comic,
 	'queryset'		: queryset
 	}
@@ -134,12 +134,13 @@ def chapter_create_view(request, pk):
 		file_form = ChapterZipForm(request.POST or None, request.FILES or None)
 		form = ChapterCreateForm(request.POST or None)		
 
-		saved_chapter = saveChapter.save(fileForm = file_form, chapterForm = form, request = request)
-		try:
-			sendNotif.send(saved_chapter)
-		except:
-			pass
-		return redirect("chapter-view",saved_chapter.pk)
+		if file_form.is_valid() and form.is_valid():
+			saved_chapter = saveChapter.save(fileForm = file_form, chapterForm = form, request = request)
+			try:
+				sendNotif.send(saved_chapter, form.cleaned_data['discord_message'])
+			except:
+				pass
+			return redirect("chapter-view",saved_chapter.pk)
 			
 	else:
 		form = ChapterCreateForm(initial={'comic': current_comic})

@@ -1,6 +1,6 @@
 from discord_webhook import DiscordWebhook, DiscordEmbed
-def send(chapter):
-    webhook = DiscordWebhook(content="<@&595718631984332811>", url='https://discordapp.com/api/webhooks/595905581181698048/qfdi8ZyuuvokzcXThH4JC7iO6_0q4dEhU5MXaM2Yfl56nGiRYOYC66QukxB7gCykhEF6')
+def send(chapter, discord_message):
+    webhook = DiscordWebhook(content="<@&{role_id}> {message}".format(role_id = chapter.comic.discord_role_id, message=discord_message), url='https://discordapp.com/api/webhooks/595905581181698048/qfdi8ZyuuvokzcXThH4JC7iO6_0q4dEhU5MXaM2Yfl56nGiRYOYC66QukxB7gCykhEF6')
     webhook.execute()
 
     domainName = "http://firesyndicate.tk"

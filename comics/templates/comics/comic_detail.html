@@ -46,7 +46,11 @@
 	</table>
 
 	<table class="content-table">
+
+	
 	{% for chapter in queryset %}
+		{%if chapter.volume is not None%}{% ifchanged %}
+		<tr><td><h4 class="volume-h4">Volume {{chapter.volume|floatformat}}</h4></td></tr>{% endifchanged %}{%endif%}
 
 		<tr class="table-row" onclick="goto('{{chapter.get_absolute_url}}')">
 		<td class="chapter-title">Chapter {{chapter.number|floatformat}}</a></td>

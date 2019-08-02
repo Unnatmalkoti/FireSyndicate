@@ -18,17 +18,22 @@ class Tag(models.Model):
 class Comic(models.Model):
 
 	display_choices= [("M","Manga Style",), ("W","Webtoon Style")]
-	status_choices = [("W","Working"), ( "H", "On Hold"), ("D", "Dropped"),("I", "Inactive")]
+	status_choices = [("W","Working"),( "H", "On Hold"), ("D", "Dropped"),("I", "Inactive"),("C","Completed")]
 
 	title 					= models.CharField(max_length = 120)
 	author					= models.CharField(max_length = 120)
 	artist					= models.CharField(max_length = 120)
 	description				= models.TextField()
+	cover 					= models.ImageField(upload_to="covers/")
+
 	default_display_style	= models.CharField(choices=display_choices, default="W", max_length=1)
 	tags					= models.ManyToManyField(Tag, verbose_name="Tags", blank=True)
-	cover 					= models.ImageField(upload_to="covers/")
-	status					= models.CharField(choices=status_choices, default="W",max_length=1)				
+	discord_role_id			= models.CharField("Discord Role Id", max_length=40)
+	status					= models.CharField(choices=status_choices, default="W",max_length=1)
+
+					
 	views_cnt				= models.PositiveIntegerField(default = 0)
+
 
 	def __str__(self):
 		return "{title}".format(title = self.title)
@@ -52,6 +57,8 @@ class Comic(models.Model):
 class Chapter(models.Model):
 	number 			= models.DecimalField(max_digits = 10,  decimal_places = 2)
 	name			= models.CharField(max_length = 120, blank = True, null = True)
+	volume			= models.DecimalField(max_digits=3, decimal_places=1, blank = True, null = True)
+
 	views_cnt		= models.PositiveIntegerField(default = 0, null = False)
 	updated_at 		= models.DateTimeField(auto_now=True)
 	created_at 		= models.DateTimeField(auto_now_add=True)

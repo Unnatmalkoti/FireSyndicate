@@ -9,24 +9,43 @@
 
 {%block content%}
 <section>
-<div class="section-heading">Upload Chapter</div>
-<form class ="upload-form"method="POST" enctype= "multipart/form-data"> {% csrf_token %}
-	{{form.non_field_errors}}
-	{{file_form.non_field_errors}}
-	{%render_field form.comic id="comic-combo-box"%}
-	<p id="comic-title"></p>
-	<span>Chapter</span>
-	{{form.number.errors}}
-	{% render_field form.number id="ch-number" placeholder="##"%}
-	{{form.name.errors}}
-	{% render_field form.name id="ch-name" placeholder="Name"%}
-	<br>
-	{{file_form.zip.errors}}
-	{% render_field file_form.zip id="zip"%}
+	<div class="section-heading"><strong>Chapter Upload</strong><span id="comic-title"></span></div>
+	<form class ="upload-form"method="POST" enctype= "multipart/form-data"> {% csrf_token %}
+		{{form.non_field_errors}}
+		{{file_form.non_field_errors}}
+		{%render_field form.comic id="comic-combo-box"%}
+		{{form.volume.errors}}
+		<label for="vol-number"><span>Volume<span></label>
+		{% render_field form.volume id="vol-number" placeholder="##"%}
+		<br>
+		<span>Chapter</span>
+		{{form.number.errors}}
+		{% render_field form.number id="ch-number" placeholder="##"%}
+		{{form.name.errors}}
+		{% render_field form.name id="ch-name" placeholder="Name"%}
+		<br>
+		{{form.discord_message.errors}}
+		<label for="discord-message"><span>Discord Message<span></label>
+		{%render_field form.discord_message id="discord-message" placeholder="Yay! New releases. Idk."%}
+		<br>
+		{{file_form.zip.errors}}
+		{% render_field file_form.zip id="zip"%}
 
-	<input type="submit" class="button primary-btn" value="Upload">
-</form>
-<section>
+		<input type="submit" class="button primary-btn" value="Upload">
+	</form>
+</section>
+<section class="right-section">
+<div>
+	<div class="section-heading">Before you go uploading</div>
+	<ul class="guide-ul">
+		<li>You need to upload a zip file containing all the images.</li>
+		<li>I haven't set any upload limits yet, but please be considerate of the sizes of the files you upload</li>
+		<li>Leave Volume empty if there isn't any.</li>
+		<li>If it's a one shot, leave volume empty, chapter number 0 with name "One shot".</li>
+	</ul>
+<div>
+
+</section>
 <script>
 	var comboBox =document.querySelector("#comic-combo-box");
 	var seriesText = comboBox.options[comboBox.selectedIndex].text;
